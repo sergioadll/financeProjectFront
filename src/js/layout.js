@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./views/home";
+import { Search } from "./component/search.js";
+import { Details } from "./views/details";
 import { Login } from "./views/login";
 import { Single } from "./views/single";
 import injectContext from "./store/appContext";
@@ -21,10 +23,15 @@ const Layout = () => {
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbar />
+                    <div className="d-flex justify-content-center">
+                        <Search />
+                    </div>
+
 					<Switch>
 						<Route exact path="/">
 							<Home />
 						</Route>
+						<Route exact path="/details" component={Details} />
 						<Route exact path="/login">
 							<Login />
 						</Route>

@@ -88,7 +88,7 @@ export const Navbar = () => {
 					</button>
 
 					<a href="/login" className="btn btn-success">
-						Success
+						Login
 					</a>
 				</div>
 			</div>

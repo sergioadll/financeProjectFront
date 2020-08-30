@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 
-export const Card = () => (
-	<div className="col-md-4">
+export const DetailCard = () => (
+	<div className="col-md-10 justify-content-center">
 		<div className="card mb-4 shadow-sm">
+			<div className="card-body">
+				<p className="card-text">Stock name, last price, price variation, index</p>
+			</div>
 			<svg
 				className="bd-placeholder-img card-img-top"
 				width="100%"
-				height="225"
+				height="300"
 				xmlns="http://www.w3.org/2000/svg"
 				preserveAspectRatio="xMidYMid slice"
 				focusable="false"
