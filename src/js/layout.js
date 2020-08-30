@@ -23,9 +23,9 @@ const Layout = () => {
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbar />
-                    <div className="d-flex justify-content-center">
-                        <Search />
-                    </div>
+					<div className="d-flex justify-content-center">
+						<Search />
+					</div>
 
 					<Switch>
 						<Route exact path="/">
