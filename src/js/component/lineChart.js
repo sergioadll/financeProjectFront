@@ -3,7 +3,6 @@ import { Bar } from "react-chartjs-2";
 
 export const LineChart = () => {
 	const dataBar = {
-		type: "line",
 		labels: ["monday", "tuesday", "wednesday", "thursday", "friday"],
 		datasets: [
 			{

@@ -1,42 +1,27 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			Watchlist: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+			loadPrice: async page => {
+				const urlPeople =
+					"https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=1&from=1572651390&to=1572910590&token=bsrbhmf48v6tucpg28a0";
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
+				var requestOptions = {
+					method: "GET",
+					redirect: "follow"
+				};
+				try {
+					let res = await fetch(urlPeople, requestOptions);
+					let result = await res.json();
+					let active = await setStore({});
+					let price = await result;
+					setStore({ Watchlist: price });
+				} catch (error) {
+					console.log("error", error);
+				}
 			}
 		}
 	};
