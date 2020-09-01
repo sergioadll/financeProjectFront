@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Chart } from "./chart";
+import { LineChart } from "./lineChart";
 
 export const Card = () => (
 	<div className="col-md-4">
 		<div className="card mb-4 shadow-sm">
-			<Chart />
+			<LineChart />
 			<div className="card-body">
 				<p className="card-text">
 					This is a wider card with supporting text below as a natural lead-in to additional content. This
