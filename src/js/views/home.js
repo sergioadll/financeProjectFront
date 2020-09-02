@@ -5,7 +5,7 @@ import { Card } from "../component/card.js";
 
 export const Home = () => {
 	return (
-		<section>
+		<section className="">
 			<div className="card-group">
 				<Card />
 				<Card />

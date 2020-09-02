@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LineChart } from "./lineChart";
+import { DetailChart } from "./detailChart";
 
 export const DetailCard = () => (
 	<div className="col-md-10 justify-content-center">
@@ -7,7 +7,7 @@ export const DetailCard = () => (
 			<div className="card-body">
 				<p className="card-text">Stock name, last price, price variation, index</p>
 			</div>
-			<LineChart />
+			<DetailChart />
 			<div className="card-body">
 				<p className="card-text">
 					This is a wider card with supporting text below as a natural lead-in to additional content. This

@@ -4,6 +4,7 @@ import { LineChart } from "./lineChart";
 export const Card = () => (
 	<div className="col-md-4">
 		<div className="card mb-4 shadow-sm">
+			<p className="card-text pl-3 pt-2">Stock name, last price, price variation, index</p>
 			<LineChart />
 			<div className="card-body">
 				<p className="card-text">

@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// Use getActions to call a function within a fuction
 			convertEpochDate: epoch => {
 				var myDate = new Date(epoch * 1000);
-				var date = myDate.toGMTString().slice(0, -12);
+				var date = myDate.toGMTString().slice(4, -12);
 				return date;
 			},
 			createDateArray: stockDates => {

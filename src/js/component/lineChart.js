@@ -1,64 +1,88 @@
 import React, { Component } from "react";
 import { useState, useEffect, useContext } from "react";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 import { Context } from "../store/appContext";
 
 export const LineChart = () => {
 	const { store, actions } = useContext(Context);
+	const options = {
+		scales: {
+			xAxes: [
+				{
+					ticks: { display: false },
+					gridLines: {
+						display: false
+					}
+				}
+			],
+			yAxes: [
+				{
+					//ticks: { display: false },
+				}
+			]
+		},
+		legend: {
+			display: false
+		},
+		elements: {
+			point: {
+				radius: 0
+			},
+			line: {
+				tension: 0 // disables bezier curves
+			}
+		},
+		layout: {
+			padding: {
+				right: 20,
+				left: 10
+			}
+		}
+	};
+
 	if (store.Watchlist.s === "ok") {
 		const dates = actions.createDateArray(store.Watchlist.t);
 		//actions.createDateArray(store.Watchlist.t);
 		//console.log(actions.createDateArray(store.Watchlist.t));
-		const dataBar = {
+		const dataLine = {
 			labels: dates,
 			datasets: [
 				{
-					type: "bar",
-					label: ["Volume"],
-					data: store.Watchlist.v,
-					backgroundColor: "#EC932F"
-				},
-				{
-					type: "line",
 					fill: false,
 					label: ["Price"],
 					data: store.Watchlist.c,
-					borderColor: "#000000",
-					backgroundColor: "#09cde3"
+					pointRadius: 0,
+					borderColor: "#2493ed",
+					backgroundColor: "#2493ed",
+					borderWidth: "1"
 				}
 			]
 		};
 
 		return (
 			<div className="chart">
-				<Bar data={dataBar} />
+				<Line data={dataLine} options={options} />
 				<div />
 			</div>
 		);
 	} else {
 		const dataBar = {
-			labels: ["monday", "tuesday", "wednesday", "not", "notShow"],
+			labels: ["We", "Are", "Loading", "Your", "Data", "..."],
 			datasets: [
-				{
-					type: "bar",
-					label: ["Volume"],
-					data: [3234, 4452, 1434, 2252, 6434],
-					backgroundColor: "#EC932F"
-				},
 				{
 					type: "line",
 					fill: false,
 					label: ["Price"],
-					data: [45234, 23452, 4234, 23452, 32423],
-					borderColor: "#000000",
-					backgroundColor: "#09cde3"
+					data: [50, 50, 0, 100, 50, 50],
+					borderColor: "#2493ed",
+					backgroundColor: "#2493ed"
 				}
 			]
 		};
 
 		return (
 			<div className="chart">
-				<Bar data={dataBar} />
+				<Bar data={dataBar} options={options} />
 				<div />
 			</div>
 		);

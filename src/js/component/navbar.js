@@ -50,7 +50,7 @@ export const Navbar = () => {
 					</div>
 				</div>
 			</div>
-			<div className="navbar navbar-dark bg-dark shadow-sm">
+			<div className="navbar navbar-dark bg-dark shadow-sm border-bottom border-primary">
 				<div className="container d-flex justify-content-between">
 					<a href="/" className="navbar-brand d-flex align-items-center">
 						<svg
@@ -87,7 +87,7 @@ export const Navbar = () => {
 						/>
 					</button>
 
-					<a href="/login" className="btn btn-success">
+					<a href="/login" className="btn btn-outline-success">
 						Login
 					</a>
 				</div>
