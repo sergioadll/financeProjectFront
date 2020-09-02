@@ -51,7 +51,6 @@ export const LineChart = () => {
 					fill: false,
 					label: ["Price"],
 					data: store.Watchlist.c,
-					pointRadius: 0,
 					borderColor: "#2493ed",
 					backgroundColor: "#2493ed",
 					borderWidth: "1"
@@ -66,7 +65,7 @@ export const LineChart = () => {
 			</div>
 		);
 	} else {
-		const dataBar = {
+		const dataLine = {
 			labels: ["We", "Are", "Loading", "Your", "Data", "..."],
 			datasets: [
 				{
@@ -82,7 +81,7 @@ export const LineChart = () => {
 
 		return (
 			<div className="chart">
-				<Bar data={dataBar} options={options} />
+				<Line data={dataLine} options={options} />
 				<div />
 			</div>
 		);
