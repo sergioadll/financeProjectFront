@@ -5,9 +5,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
+			convertEpochDate: epoch => {
+				var myDate = new Date(epoch * 1000);
+				var date = myDate.toGMTString().slice(0, -12);
+				return date;
+			},
+			createDateArray: stockDates => {
+				let date = [];
+				stockDates.map((element, index) => {
+					date[index] = getActions().convertEpochDate(element);
+				});
+				return date;
+			},
+			convertTimeEpoch: date => {
+				const time = Math.round(new Date().getTime() / 1000.0);
+				return time;
+			},
 			loadPrice: async page => {
 				const urlPeople =
-					"https://finnhub.io/api/v1/stock/candle?symbol=AAPL&resolution=1&from=1572651390&to=1572910590&token=bsrbhmf48v6tucpg28a0";
+					"https://finnhub.io/api/v1/stock/candle?symbol=IBM&resolution=D&from=1546383599&to=1575243390&token=bsrbhmf48v6tucpg28a0";
 
 				var requestOptions = {
 					method: "GET",
