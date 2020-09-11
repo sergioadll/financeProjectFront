@@ -13,6 +13,7 @@ export const Register = () => {
 							<h1 className="h3 mb-3 font-weight-normal">Floating labels</h1>
 						</div>
 						<div className="form-label-group">
+							<label htmlFor="inputName">Name</label>
 							<input
 								type="name"
 								id="inputName"
@@ -21,9 +22,9 @@ export const Register = () => {
 								required
 								autoFocus
 							/>
-							<label htmlFor="inputName">Name</label>
 						</div>
 						<div className="form-label-group">
+							<label htmlFor="inputEmail">Email address</label>
 							<input
 								type="email"
 								id="inputEmail"
@@ -32,9 +33,9 @@ export const Register = () => {
 								required
 								autoFocus
 							/>
-							<label htmlFor="inputEmail">Email address</label>
 						</div>{" "}
 						<div className="form-label-group">
+							<label htmlFor="inputPassword">Password</label>
 							<input
 								type="password"
 								id="inputPassword"
@@ -42,9 +43,9 @@ export const Register = () => {
 								placeholder="Password"
 								required
 							/>
-							<label htmlFor="inputPassword">Password</label>
 						</div>
 						<div className="form-label-group">
+							<label htmlFor="inputPassword">Confirm Password</label>
 							<input
 								type="password"
 								id="inputPassword"
@@ -52,7 +53,6 @@ export const Register = () => {
 								placeholder="Confirm Password"
 								required
 							/>
-							<label htmlFor="inputPassword">Confirm Password</label>
 						</div>
 						<button className="btn btn-lg btn-primary btn-block" type="submit">
 							Register
