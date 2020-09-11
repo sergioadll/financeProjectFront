@@ -20,7 +20,9 @@ export const Card = () => (
 							Add to Watchlist
 						</button>
 					</div>
-					<small className="text-muted">9 mins</small>
+					<button type="button" className="btn btn-sm font-weight-bold btn-danger text-light">
+						X
+					</button>
 				</div>
 			</div>
 		</div>

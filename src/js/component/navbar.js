@@ -71,10 +71,14 @@ export const Navbar = () => {
 							}}
 						/>
 					</button>
-
-					<a href="/login" className="btn btn-outline-success">
-						Login
-					</a>
+					<div className="btn-group">
+						<a href="/register" className="btn btn-outline-success">
+							Log In
+						</a>
+						<a href="/register" className="btn btn-outline-success">
+							Register
+						</a>
+					</div>
 				</div>
 			</div>
 		</header>

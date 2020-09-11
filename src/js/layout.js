@@ -6,7 +6,7 @@ import { Home } from "./views/home";
 import { Search } from "./component/search.js";
 import { Details } from "./views/details";
 import { Profile } from "./views/profile";
-import { Login } from "./views/login";
+import { Register } from "./views/register";
 import { Single } from "./views/single";
 import injectContext from "./store/appContext";
 
@@ -34,8 +34,8 @@ const Layout = () => {
 						</Route>
 						<Route exact path="/details" component={Details} />
 						<Route exact path="/profile" component={Profile} />
-						<Route exact path="/login">
-							<Login />
+						<Route exact path="/register">
+							<Register />
 						</Route>
 						<Route exact path="/single/:theid">
 							<Single />
