@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { Login } from "./login";
 
 export const Navbar = () => {
 	const [showMenu, setShowMenu] = useState(false);
@@ -72,9 +73,14 @@ export const Navbar = () => {
 						/>
 					</button>
 					<div className="btn-group">
-						<a href="/register" className="btn btn-outline-success">
-							Log In
-						</a>
+						<button
+							className="btn btn-outline-success"
+							data-target="#exampleModal"
+							onClick={() => {
+								Login();
+							}}>
+							Login
+						</button>
 						<a href="/register" className="btn btn-outline-success">
 							Register
 						</a>
