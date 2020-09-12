@@ -10,7 +10,7 @@ export const Register = () => {
 				<div className="card-body">
 					<form className="form-signin">
 						<div className="text-center mb-4">
-							<h1 className="h3 mb-3 font-weight-normal">Floating labels</h1>
+							<h1 className="h3 mb-3 font-weight-normal">Register</h1>
 						</div>
 						<div className="form-label-group">
 							<label htmlFor="inputName">Name</label>
@@ -54,7 +54,7 @@ export const Register = () => {
 								required
 							/>
 						</div>
-						<button className="btn btn-lg btn-primary btn-block" type="submit">
+						<button className="btn btn-lg btn-primary btn-block mt-4" type="submit">
 							Register
 						</button>
 						<p className="mt-3 text-muted text-center">&copy; 2020 - 2021</p>

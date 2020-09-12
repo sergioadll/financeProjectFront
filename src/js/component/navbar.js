@@ -73,17 +73,7 @@ export const Navbar = () => {
 						/>
 					</button>
 					<div className="btn-group">
-						<button
-							className="btn btn-outline-success"
-							data-target="#exampleModal"
-							onClick={() => {
-								Login();
-							}}>
-							Login
-						</button>
-						<a href="/register" className="btn btn-outline-success">
-							Register
-						</a>
+						<Login />
 					</div>
 				</div>
 			</div>
