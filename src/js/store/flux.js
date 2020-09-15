@@ -1,7 +1,8 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			Watchlist: []
+			Watchlist: [],
+			watchlists: [{ id: 1, user_id: 1, name: "Short-term" }, { id: 2, user_id: 1, name: "Long-term" }]
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
