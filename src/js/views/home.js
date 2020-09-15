@@ -1,33 +1,28 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
+
 import "../../styles/home.scss";
-import Pagination from "react-bootstrap/Pagination";
+
 import { Card } from "../component/card.js";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	const { pagState, setPagState } = useState("");
-	return (
-		<section className="">
-			<div className="d-flex justify-content-center">
-				<Pagination size="sm" className="">
-					<Pagination.First />
-					<Pagination.Prev />
-					{store.watchlists.map((element, index) => {
-						return (
-							<Pagination.Item
-								key={index}
-								className={pagState}
-								onClick={() => setPagState((pagState = "active"))}>
-								{element.name}
-							</Pagination.Item>
-						);
-					})}
-					<Pagination.Item>+</Pagination.Item>
-					<Pagination.Next />
-					<Pagination.Last />
-				</Pagination>
-			</div>
+	const [key, setKey] = useState(1);
+
+	// definit state segun documentacion
+
+	// mostrar el primer watchlist por defecto
+
+	// establecer la funcion que se llamará al hacer el onClick
+	// para cargar el contenido del siguiente tab
+	let content;
+	const watchlistContent = key => {
+		console.log(key);
+		// Obtener el contenido del watchlist correspondiente
+		// al valor en element (fetch)
+		const content = (
 			<div className="card-group">
 				<Card />
 				<Card />
@@ -35,6 +30,28 @@ export const Home = () => {
 				<Card />
 				<Card />
 				<Card />
+			</div>
+		);
+	};
+
+	const watchlists = store.watchlists.map((element, index) => {
+		return (
+			<Tab key={element.id} eventKey={element.id} title={element.name}>
+				{content}
+			</Tab>
+		);
+	});
+
+	return (
+		<section className="">
+			<div className="d-flex justify-content-center">
+				<Tabs
+					defaultActiveKey={1}
+					id="controlled-tab-example"
+					activeKey={key}
+					onSelect={k => watchlistContent(k)}>
+					{watchlists}
+				</Tabs>
 			</div>
 		</section>
 	);
