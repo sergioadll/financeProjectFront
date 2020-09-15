@@ -6,7 +6,7 @@ import { Card } from "../component/card.js";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	const { state, setState } = useState("active");
+	const { pagState, setPagState } = useState("");
 	return (
 		<section className="">
 			<div className="d-flex justify-content-center">
@@ -14,8 +14,16 @@ export const Home = () => {
 					<Pagination.First />
 					<Pagination.Prev />
 					{store.watchlists.map((element, index) => {
-						return <Pagination.Item key={index}>{element.name}</Pagination.Item>;
+						return (
+							<Pagination.Item
+								key={index}
+								className={pagState}
+								onClick={() => setPagState((pagState = "active"))}>
+								{element.name}
+							</Pagination.Item>
+						);
 					})}
+					<Pagination.Item>+</Pagination.Item>
 					<Pagination.Next />
 					<Pagination.Last />
 				</Pagination>
