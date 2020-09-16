@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
+
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 
@@ -10,6 +11,7 @@ import { Card } from "../component/card.js";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [key, setKey] = useState(1);
+	const [content, setContent] = useState();
 
 	// definit state segun documentacion
 
@@ -17,24 +19,18 @@ export const Home = () => {
 
 	// establecer la funcion que se llamará al hacer el onClick
 	// para cargar el contenido del siguiente tab
-	let content;
 	const watchlistContent = key => {
-		console.log(key);
 		// Obtener el contenido del watchlist correspondiente
 		// al valor en element (fetch)
-		const content = (
-			<div className="card-group">
-				<Card />
-				<Card />
-				<Card />
-				<Card />
-				<Card />
-				<Card />
-			</div>
-		);
+		const watchelements = store.watchlistStocks.map((element, index) => {
+			return <div key={index}>{element.stock_symbol}</div>;
+		});
+		setContent(watchelements);
 	};
-
+	console.log(key, content);
 	const watchlists = store.watchlists.map((element, index) => {
+		/*const content*/
+
 		return (
 			<Tab key={element.id} eventKey={element.id} title={element.name}>
 				{content}
@@ -44,15 +40,13 @@ export const Home = () => {
 
 	return (
 		<section className="">
-			<div className="d-flex justify-content-center">
-				<Tabs
-					defaultActiveKey={1}
-					id="controlled-tab-example"
-					activeKey={key}
-					onSelect={k => watchlistContent(k)}>
-					{watchlists}
-				</Tabs>
-			</div>
+			<Tabs
+				defaultActiveKey={1}
+				id="controlled-tab-example"
+				activeKey={key}
+				onSelect={k => (setKey(k), watchlistContent(k))}>
+				{watchlists}
+			</Tabs>
 		</section>
 	);
 };
