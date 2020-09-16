@@ -11,7 +11,17 @@ import { Card } from "../component/card.js";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [key, setKey] = useState(1);
-	const [content, setContent] = useState();
+	const [content, setContent] = useState(
+		store.watchlistStocks.map((element, index) => {
+			console.log(element.stock_symbol);
+			return (
+				<div key={index}>
+					Stock Symbol:
+					{element.stock_symbol}
+				</div>
+			);
+		})
+	);
 
 	// definit state segun documentacion
 
@@ -19,11 +29,16 @@ export const Home = () => {
 
 	// establecer la funcion que se llamará al hacer el onClick
 	// para cargar el contenido del siguiente tab
-	const watchlistContent = key => {
+	const watchlistContent = watchlist_id => {
 		// Obtener el contenido del watchlist correspondiente
 		// al valor en element (fetch)
 		const watchelements = store.watchlistStocks.map((element, index) => {
-			return <div key={index}>{element.stock_symbol}</div>;
+			return (
+				<div key={index}>
+					Stock Symbol:
+					{element.stock_symbol}
+				</div>
+			);
 		});
 		setContent(watchelements);
 	};
@@ -41,7 +56,7 @@ export const Home = () => {
 	return (
 		<section className="">
 			<Tabs
-				defaultActiveKey={1}
+				defaultActiveKey="1"
 				id="controlled-tab-example"
 				activeKey={key}
 				onSelect={k => (setKey(k), watchlistContent(k))}>

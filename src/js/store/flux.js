@@ -2,13 +2,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			Watchlist: [],
-			watchlists: [{ id: 1, user_id: 1, name: "Short-term" }, { id: 2, user_id: 1, name: "Long-term" }],
+			watchlists: [{ id: 1, name: "Short-term" }, { id: 2, name: "Long-term" }],
 			watchlistStocks: []
 		},
 		actions: {
 			//ACTIONS TO GET DATA FROM OUR API
 			loadWatchlists: async user_id => {
-				const urlBase = "https://3000-f74f5608-fa15-4912-b026-ce7a2344e876.ws-eu01.gitpod.io";
+				const urlBase = "https://3000-f74f5608-fa15-4912-b026-ce7a2344e876.ws-eu01.gitpod.io/";
 				const urlExt = "/user/".concat(user_id.toString(), "/watchlist");
 				const urlWatchlists = urlBase.concat(urlExt);
 
@@ -26,9 +26,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("error", error);
 				}
 			},
-			loadWatchElements: async watchlist_id => {
+			loadStocksFromWatchlists: async watchlist_id => {
 				//modificar cuando se tenga el endpoint
-				const urlBase = "https://3000-f74f5608-fa15-4912-b026-ce7a2344e876.ws-eu01.gitpod.io";
+				const urlBase = "https://3000-f74f5608-fa15-4912-b026-ce7a2344e876.ws-eu01.gitpod.io/";
 				const urlExt = "/watchlist/".concat(watchlist_id.toString(), "/watchelement");
 				const urlWatchelement = urlBase.concat(urlExt);
 
