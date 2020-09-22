@@ -70,6 +70,7 @@
 		]
 	},
 	"dependencies": {
+		"base-64": "^0.1.0",
 		"bootstrap": "^4.5.2",
 		"chart.js": "^2.9.3",
 		"prop-types": "^15.6.1",

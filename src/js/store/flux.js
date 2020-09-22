@@ -1,16 +1,41 @@
+import { encode } from "base-64";
+
+const urlBase = "https://3000-cce3d78b-04e9-46e1-bdc8-00f4637a3aa0.ws-eu01.gitpod.io/";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			token: "",
 			Watchlist: [],
 			watchlists: [{ id: 1, name: "Short-term" }, { id: 2, name: "Long-term" }],
 			watchlistStocks: []
 		},
 		actions: {
+			login: async (email, password) => {
+				const urlLogin = urlBase.concat("/login");
+
+				var headers = new Headers();
+				let base64 = require("base-64");
+				headers.set("Authorization", "Basic " + base64.encode(email + ":" + password));
+
+				var requestOptions = {
+					method: "POST",
+					headers: headers,
+					redirect: "follow"
+				};
+				try {
+					let res = await fetch(urlLogin, requestOptions);
+					let result = await res.json();
+					let active = await setStore({});
+					let token = await result;
+					setStore({ token: token });
+					console.log("user token", token);
+				} catch (error) {
+					console.log("error", error);
+				}
+			},
 			//ACTIONS TO GET DATA FROM OUR API
-			loadWatchlists: async user_id => {
-				const urlBase = "https://3000-f74f5608-fa15-4912-b026-ce7a2344e876.ws-eu01.gitpod.io/";
-				const urlExt = "/user/".concat(user_id.toString(), "/watchlist");
-				const urlWatchlists = urlBase.concat(urlExt);
+			loadWatchlists: async () => {
+				const urlWatchlists = urlBase.concat("/user/watchlist");
 
 				var requestOptions = {
 					method: "GET",
@@ -22,14 +47,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let active = await setStore({});
 					let watchlists = await result;
 					setStore({ watchlists: watchlists });
+					console.log("store watchlists:", watchlists);
 				} catch (error) {
 					console.log("error", error);
 				}
 			},
 			loadStocksFromWatchlists: async watchlist_id => {
 				//modificar cuando se tenga el endpoint
-				const urlBase = "https://3000-f74f5608-fa15-4912-b026-ce7a2344e876.ws-eu01.gitpod.io/";
-				const urlExt = "/watchlist/".concat(watchlist_id.toString(), "/watchelement");
+				const urlExt = "/watchlist/".concat(watchlist_id.toString());
 				const urlWatchelement = urlBase.concat(urlExt);
 
 				var requestOptions = {

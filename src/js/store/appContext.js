@@ -31,7 +31,8 @@ const injectContext = PassedComponent => {
 			 *
 			 **/
 			state.actions.loadPrice();
-			state.actions.loadWatchlists(1);
+			//state.actions.login("sergio@sergio.com", "123esad0");
+			//state.actions.loadWatchlists();
 			/*state.actions.loadWatchElements(1);*/
 		}, []);
 
