@@ -7,49 +7,48 @@ import Tab from "react-bootstrap/Tab";
 import "../../styles/home.scss";
 
 import { Card } from "../component/card.js";
+import { TabContent } from "../component/tabContent.js";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	const [key, setKey] = useState(store.watchlists[0].id);
-	const [content, setContent] = useState(
-		store.watchlistStocks.map((element, index) => {
-			//console.log("home. stocks",element.stock_symbol);
-			return <div key={index}>{element.name}</div>;
-		})
-	);
-
-	const watchlistContent = key => {
-		console.log("home stocks:   ", store.watchlistStocks);
-		const watchlistStocks = store.watchlistStocks.map((element, index) => {
-			return <div key={element.id}>{element.name}</div>;
-		});
-		setContent(watchlistStocks);
-	};
-
+	const [key, setKey] = useState(store.watchlists[0].id.toString());
+	//console.log("dentro Home", key);
+	useEffect(() => {
+		setKey(store.watchlists[0].id.toString());
+	}),
+		[store.token];
 	const userWatchlists = store.watchlists.map((element, index) => {
-		if (store.token != "") {
-			//setKey(store.watchlists[0].id);
-			//actions.loadStocksFromWatchlists(4);
-		}
+		/*console.log("dentro userwatchlist", key);
+		if (store.token != null) {
+			setKey(store.watchlists[0].id.toString());
+		}*/
 		return (
 			<Tab key={element.id} eventKey={element.id} title={element.name}>
-				{content}
+				<TabContent watchlist={key} />
 			</Tab>
 		);
 	});
 	return (
 		<section>
-			<Tabs
-				defaultActiveKey="1"
-				id="controlled-tab-example"
-				activeKey={key}
-				/*onSelect={k => (setKey(k), watchlistContent(k))}*/
-			>
+			<Tabs defaultActiveKey="1" id="controlled-tab-example" activeKey={key} onSelect={k => setKey(k)}>
 				{userWatchlists}
 			</Tabs>
 		</section>
 	);
 
+	/* 
+    /// SERGIO
+    const watchlistContent = key => {
+		if (store.token != "") {
+			//setKey(store.watchlists[0].id);
+			actions.loadStocksFromWatchlists(key);
+		}
+		console.log("home stocks:   ", store.watchlistStocks);
+		const watchlistStocks = store.watchlistStocks.map((element, index) => {
+			return <div key={element.id}>{element.name}</div>;
+		});
+		setContent(watchlistStocks);
+	};*/
 	//CON MARCO
 
 	/*

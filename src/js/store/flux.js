@@ -1,12 +1,12 @@
 import { encode } from "base-64";
 
-const urlBase = "https://3000-cce3d78b-04e9-46e1-bdc8-00f4637a3aa0.ws-eu01.gitpod.io/";
+const urlBase = "https://3000-f02fdf9a-7b7f-45f0-b64b-b90b00be1a5d.ws-eu01.gitpod.io/";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			token: "",
+			token: null,
 			Watchlist: [],
-			watchlists: [{ id: 1, name: "Short-term" }, { id: 2, name: "Long-term" }],
+			watchlists: [{ id: 100, name: "Short-term" }, { id: 101, name: "Long-term" }],
 			watchlistStocks: [
 				{
 					id: 13972,
@@ -45,6 +45,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let token = await result;
 					setStore({ token: token.token });
 					getActions().loadWatchlists();
+					console.log(token);
 				} catch (error) {
 					console.log("error", error);
 				}
@@ -91,7 +92,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let active = await setStore({});
 					let stocks = await result;
 					setStore({ watchlistStocks: stocks });
-					console.log("store stocks:  clavestock    ", stocks);
+					console.log("store stocks:    ", stocks);
 				} catch (error) {
 					console.log("error", error);
 				}
