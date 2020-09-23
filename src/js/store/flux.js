@@ -7,7 +7,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: "",
 			Watchlist: [],
 			watchlists: [{ id: 1, name: "Short-term" }, { id: 2, name: "Long-term" }],
-			watchlistStocks: []
+			watchlistStocks: [
+				{
+					id: 13972,
+					name: "APPLE INC MOCKUP",
+					symbol: "AAPL"
+				},
+				{
+					id: 17992,
+					name: "INTL BUSINESS MACHINES CORP MOCKUP",
+					symbol: "IBM"
+				},
+				{
+					id: 23342,
+					name: "TESLA INC MOCKUP",
+					symbol: "TSLA"
+				}
+			]
 		},
 		actions: {
 			login: async (email, password) => {
@@ -27,8 +43,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let result = await res.json();
 					let active = await setStore({});
 					let token = await result;
-					setStore({ token: token });
-					console.log("user token", token);
+					setStore({ token: token.token });
+					getActions().loadWatchlists();
 				} catch (error) {
 					console.log("error", error);
 				}
@@ -36,9 +52,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//ACTIONS TO GET DATA FROM OUR API
 			loadWatchlists: async () => {
 				const urlWatchlists = urlBase.concat("/user/watchlist");
+				var myHeaders = new Headers();
+				const token = getStore().token;
+				myHeaders.append("X-Access-Tokens", token);
 
 				var requestOptions = {
 					method: "GET",
+					headers: myHeaders,
 					redirect: "follow"
 				};
 				try {
@@ -47,7 +67,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let active = await setStore({});
 					let watchlists = await result;
 					setStore({ watchlists: watchlists });
-					console.log("store watchlists:", watchlists);
 				} catch (error) {
 					console.log("error", error);
 				}
@@ -57,16 +76,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const urlExt = "/watchlist/".concat(watchlist_id.toString());
 				const urlWatchelement = urlBase.concat(urlExt);
 
+				var myHeaders = new Headers();
+				const token = getStore().token;
+				myHeaders.append("X-Access-Tokens", token);
+
 				var requestOptions = {
 					method: "GET",
+					headers: myHeaders,
 					redirect: "follow"
 				};
 				try {
 					let res = await fetch(urlWatchelement, requestOptions);
 					let result = await res.json();
 					let active = await setStore({});
-					let watchelements = await result;
-					setStore({ watchlistStocks: watchelements });
+					let stocks = await result;
+					setStore({ watchlistStocks: stocks });
+					console.log("store stocks:  clavestock    ", stocks);
 				} catch (error) {
 					console.log("error", error);
 				}
