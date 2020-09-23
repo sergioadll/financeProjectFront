@@ -15,18 +15,20 @@ export const TabContent = props => {
 
 	const loadTabContent = () => {
 		const watchlistStocks = store.watchlistStocks.map((element, index) => {
-			return <div key={element.id}>{element.name}</div>;
+			//setTabContent(<div key={element.id}>{element.name}</div>);
+			console.log(store.watchlistStocks);
+			console.log("stocks", element);
+			//return <div key={element.id}>{element.name}</div>;
 		});
-		setTabContent(watchlistStocks);
 	};
 
 	useEffect(
 		() => {
 			if (store.token != null) {
-				console.log("llamando stocks de watchlist: ", watchlist);
+				//console.log("llamando stocks de watchlist: ", watchlist);
 				actions.loadStocksFromWatchlists(watchlist);
-				loadTabContent();
 			}
+			loadTabContent();
 		},
 		[watchlist]
 	);

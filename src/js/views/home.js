@@ -18,10 +18,6 @@ export const Home = () => {
 	}),
 		[store.token];
 	const userWatchlists = store.watchlists.map((element, index) => {
-		/*console.log("dentro userwatchlist", key);
-		if (store.token != null) {
-			setKey(store.watchlists[0].id.toString());
-		}*/
 		return (
 			<Tab key={element.id} eventKey={element.id} title={element.name}>
 				<TabContent watchlist={key} />
