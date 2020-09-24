@@ -3,13 +3,15 @@ import { Context } from "../store/appContext";
 
 import PropTypes from "prop-types";
 
+import { Card } from "../component/card.js";
+
 export const TabContent = props => {
 	const { watchlist } = props;
 	const { store, actions } = useContext(Context);
 
 	const [tabContent, setTabContent] = useState(
 		store.watchlistStocks.map((element, index) => {
-			return <div key={element.id}>{element.name}</div>;
+			return <Card key={element.id} stock={element} />;
 		})
 	);
 	useEffect(
@@ -19,7 +21,8 @@ export const TabContent = props => {
 					await actions.loadStocksFromWatchlists(watchlist);
 					setTabContent(
 						store.watchlistStocks.map((element, index) => {
-							return <div key={element.id}>{element.name}</div>;
+							console.log(element.name);
+							return <Card key={element.id} stocks={element} />;
 						})
 					);
 				}
