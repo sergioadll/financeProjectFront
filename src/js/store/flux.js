@@ -45,7 +45,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let token = await result;
 					setStore({ token: token.token });
 					getActions().loadWatchlists();
-					console.log(token);
 				} catch (error) {
 					console.log("error", error);
 				}
@@ -92,7 +91,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let active = await setStore({});
 					let stocks = await result;
 					setStore({ watchlistStocks: stocks });
-					console.log("store stocks:    ", stocks);
+					//console.log("store stocks:    ", stocks);
 				} catch (error) {
 					console.log("error", error);
 				}

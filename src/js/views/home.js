@@ -12,7 +12,6 @@ import { TabContent } from "../component/tabContent.js";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [key, setKey] = useState(store.watchlists[0].id.toString());
-	//console.log("dentro Home", key);
 	useEffect(() => {
 		setKey(store.watchlists[0].id.toString());
 	}),
