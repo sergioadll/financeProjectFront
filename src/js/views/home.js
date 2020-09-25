@@ -11,25 +11,31 @@ import { TabContent } from "../component/tabContent.js";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	const [key, setKey] = useState(store.watchlists[0].id.toString());
+	const [key, setKey] = useState();
 
+	//<TabContent watchlist={key} />
 	const userWatchlists = store.watchlists.map((element, index) => {
 		return (
-			<Tab key={element.id} eventKey={element.id} title={element.name}>
+			<Tab key={index} eventKey={element.id} title={element.name}>
 				<CardGroup>
-					<TabContent watchlist={key} />
+					<div>{element.name}</div>
 				</CardGroup>
 			</Tab>
 		);
 	});
-	useEffect(() => {
-		setKey(store.watchlists[0].id.toString());
-	}),
-		[store.token];
+	useEffect(
+		() => {
+			console.log("key antes", key);
+			setKey();
+			console.log("key despues", key);
+		},
+		[store.watchlists[0].id]
+	);
 
 	return (
 		<section>
-			<Tabs defaultActiveKey="1" id="controlled-tab-example" activeKey={key} onSelect={k => setKey(k)}>
+			{console.log("Dentro RETURN TABS first watchlist id", key)}
+			<Tabs id="controlled-tab-example" activeKey={key} onSelect={k => setKey(k)}>
 				{userWatchlists}
 			</Tabs>
 		</section>

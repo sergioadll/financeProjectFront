@@ -1,6 +1,6 @@
 import { encode } from "base-64";
 
-const urlBase = "https://3000-f02fdf9a-7b7f-45f0-b64b-b90b00be1a5d.ws-eu01.gitpod.io/";
+const urlBase = "https://3000-f1b2b2a9-2863-4673-8b68-0026672c6d73.ws-eu01.gitpod.io/";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -44,7 +44,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let active = await setStore({});
 					let token = await result;
 					setStore({ token: token.token });
-					getActions().loadWatchlists();
+					await getActions().loadWatchlists();
 				} catch (error) {
 					console.log("error", error);
 				}
