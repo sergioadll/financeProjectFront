@@ -25,9 +25,7 @@ export const Home = () => {
 	});
 	useEffect(
 		() => {
-			console.log("key antes", key);
 			setKey();
-			console.log("key despues", key);
 		},
 		[store.watchlists[0].id]
 	);
