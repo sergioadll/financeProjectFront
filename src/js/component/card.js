@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 
 export const Card = props => {
 	const { stock } = props;
+	console.log("print stocks", stock);
 	return (
 		<div className="col-md-4">
 			<div className="card mb-4 shadow-sm">

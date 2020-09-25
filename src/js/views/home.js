@@ -12,13 +12,12 @@ import { TabContent } from "../component/tabContent.js";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 	const [key, setKey] = useState();
-
-	//<TabContent watchlist={key} />
+	//chequear parámetro que se le pasa al tab content;
 	const userWatchlists = store.watchlists.map((element, index) => {
 		return (
 			<Tab key={index} eventKey={element.id} title={element.name}>
 				<CardGroup>
-					<div>{element.name}</div>
+					<TabContent watchlist={key} />
 				</CardGroup>
 			</Tab>
 		);
@@ -32,7 +31,6 @@ export const Home = () => {
 
 	return (
 		<section>
-			{console.log("Dentro RETURN TABS first watchlist id", key)}
 			<Tabs id="controlled-tab-example" activeKey={key} onSelect={k => setKey(k)}>
 				{userWatchlists}
 			</Tabs>
