@@ -1,6 +1,6 @@
 import { encode } from "base-64";
 
-const urlBase = "https://3000-f1b2b2a9-2863-4673-8b68-0026672c6d73.ws-eu01.gitpod.io/";
+const urlBase = "https://3000-d3c8026a-6f54-48fc-83f7-c9e1ffc4cc40.ws-eu01.gitpod.io/";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -26,6 +26,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 			]
 		},
 		actions: {
+			register: async (email, name, last_name, password) => {
+				const urlLogin = urlBase.concat("/register");
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
+
+				var requestOptions = {
+					method: "POST",
+					headers: myHeaders,
+					body: JSON.stringify({
+						email: email,
+						name: name,
+						last_name: last_name,
+						password: password
+					}),
+					redirect: "follow"
+				};
+				try {
+					let res = await fetch(urlLogin, requestOptions);
+					let result = await res.json();
+					let active = await setStore({});
+					console.log("User Registered");
+				} catch (error) {
+					console.log("error", error);
+				}
+			},
 			login: async (email, password) => {
 				const urlLogin = urlBase.concat("/login");
 
