@@ -141,7 +141,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			//ACTIONS TO LOAD DATA FROM EXTERNAL APIS
-			loadPrice: async page => {
+			loadPrice: async symbol => {
+				const candleSize = "D";
+				const currentDate = Math.round(Date.now() / 1000.0);
+				const initialDate = currentDate - 31556926;
+				const urlStock = "https://finnhub.io/api/v1/stock/candle?symbol=".concat(
+					symbol,
+					"&resolution=",
+					candleSize,
+					"&from=",
+					initialDate,
+					"&to=",
+					currentDate,
+					"&token=bsrbhmf48v6tucpg28a0"
+				);
+				console.log(urlStock);
 				const urlPeople =
 					"https://finnhub.io/api/v1/stock/candle?symbol=IBM&resolution=D&from=1546383599&to=1575243390&token=bsrbhmf48v6tucpg28a0";
 
@@ -150,7 +164,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 				try {
-					let res = await fetch(urlPeople, requestOptions);
+					let res = await fetch(urlStock, requestOptions);
 					let result = await res.json();
 					let active = await setStore({});
 					let price = await result;

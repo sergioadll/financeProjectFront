@@ -7,11 +7,14 @@ import CardGroup from "react-bootstrap/CardGroup";
 
 import { Card } from "../component/card.js";
 
+//AÑADIR FADEIN() CSS
+
 export const TabContent = props => {
 	const { watchlist } = props;
 	const { store, actions } = useContext(Context);
 
 	const [tabContent, setTabContent] = useState(store.watchlistStocks);
+	const [isFetching, setIsFetching] = useState(false);
 
 	useEffect(
 		() => {
@@ -19,21 +22,24 @@ export const TabContent = props => {
 				if (store.token != null) {
 					await actions.loadStocksFromWatchlists(watchlist);
 					setTabContent(store.watchlistStocks);
+					setIsFetching(false);
 				}
 			}
 			loadTabContent();
 		},
 		[watchlist]
 	);
-	console.log("tabContent", tabContent, typeof tabContent);
 
 	const cards = tabContent.map((element, index) => {
-		console.log(element);
-		//debugger;
 		return <Card key={element.id} stock={element} />;
 	});
 
-	return <CardGroup>{cards}</CardGroup>;
+	return (
+		<CardGroup>
+			{isFetching && <h1>Loading your stocks...</h1>}
+			{cards}
+		</CardGroup>
+	);
 };
 
 TabContent.propTypes = {

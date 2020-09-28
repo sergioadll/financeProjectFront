@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import { useState, useEffect, useContext } from "react";
-import { Bar, Line } from "react-chartjs-2";
 import { Context } from "../store/appContext";
 
-export const LineChart = () => {
+import { Bar, Line } from "react-chartjs-2";
+
+import PropTypes from "prop-types";
+
+export const LineChart = props => {
+	const { stockSymbol } = props;
+	//console.log(getTime());
 	const { store, actions } = useContext(Context);
 	const options = {
 		scales: {
@@ -86,4 +91,8 @@ export const LineChart = () => {
 			</div>
 		);
 	}
+};
+
+LineChart.propTypes = {
+	stockSymbol: PropTypes.string
 };
