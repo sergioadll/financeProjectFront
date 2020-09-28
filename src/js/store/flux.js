@@ -69,7 +69,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let active = await setStore({});
 					let token = await result;
 					setStore({ token: token.token });
-					await getActions().loadWatchlists();
 				} catch (error) {
 					console.log("error", error);
 				}
@@ -92,6 +91,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let active = await setStore({});
 					let watchlists = await result;
 					setStore({ watchlists: watchlists });
+					//add conditional fi watchlist empty
 				} catch (error) {
 					console.log("error", error);
 				}

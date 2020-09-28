@@ -9,7 +9,7 @@ export const Card = props => {
 	return (
 		<div className="col-md-4">
 			<div className="card mb-4 shadow-sm">
-				<p className="card-text pl-3 pt-2">ok</p>
+				<p className="card-text pl-3 pt-2">{stock.name}</p>
 				<LineChart />
 				<div className="card-body">
 					<p className="card-text">Stock Information</p>
