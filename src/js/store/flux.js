@@ -6,6 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			token: null,
 			Watchlist: [],
+			stockChart: {},
 			watchlists: [{ id: 100, name: "Short-term" }, { id: 101, name: "Long-term" }],
 			watchlistStocks: [
 				{
@@ -139,6 +140,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const time = Math.round(new Date().getTime() / 1000.0);
 				return time;
 			},
+			loadChart: async symbol => {
+				const candleSize = "D";
+				const currentDate = Math.round(Date.now() / 1000.0);
+				const initialDate = currentDate - 31556926;
+				const urlStock = "https://finnhub.io/api/v1/stock/candle?symbol=".concat(
+					symbol,
+					"&resolution=",
+					candleSize,
+					"&from=",
+					initialDate,
+					"&to=",
+					currentDate,
+					"&token=bsrbhmf48v6tucpg28a0"
+				);
+				let chartDictionary = {};
+				var requestOptions = {
+					method: "GET",
+					redirect: "follow"
+				};
+				try {
+					let res = await fetch(urlStock, requestOptions);
+					let result = await res.json();
+					let active = await setStore({});
+					let chartData = await result;
+					console.log(chartData);
+					chartDictionary[symbol] = chartData;
+					setStore({ stockChart: chartDictionary });
+				} catch (error) {
+					console.log("error", error);
+				}
+			},
 
 			//ACTIONS TO LOAD DATA FROM EXTERNAL APIS
 			loadPrice: async symbol => {
@@ -155,10 +187,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					currentDate,
 					"&token=bsrbhmf48v6tucpg28a0"
 				);
-				console.log(urlStock);
-				const urlPeople =
-					"https://finnhub.io/api/v1/stock/candle?symbol=IBM&resolution=D&from=1546383599&to=1575243390&token=bsrbhmf48v6tucpg28a0";
-
 				var requestOptions = {
 					method: "GET",
 					redirect: "follow"

@@ -14,7 +14,7 @@ export const TabContent = props => {
 	const { store, actions } = useContext(Context);
 
 	const [tabContent, setTabContent] = useState(store.watchlistStocks);
-	const [isFetching, setIsFetching] = useState(false);
+	const [isFetching, setIsFetching] = useState(true);
 
 	useEffect(
 		() => {

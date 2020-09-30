@@ -30,8 +30,9 @@ const injectContext = PassedComponent => {
 			 state.actions.loadSomeData(); <---- calling this function from the flux.js actions
 			 *
 			 **/
-			state.actions.loadPrice("IBM");
+			state.actions.loadPrice("AAPL");
 			//state.actions.register("sergio", "sergio", "sergio", "sergio");
+			state.actions.loadChart("IBM");
 			state.actions.login("sergio", "sergio");
 			//state.actions.loadWatchlists();
 			//state.actions.loadStocksFromWatchlists(1);

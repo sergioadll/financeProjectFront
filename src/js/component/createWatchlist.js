@@ -47,10 +47,10 @@ export const CreateWatchlist = () => {
 						<div className="form-label-group">
 							<label htmlFor="inputLastName">Stocks</label>
 							<input
-								type="last_name"
-								id="inputLastName"
+								type="stocks"
+								id="stocks"
 								className="form-control"
-								placeholder="Last Name"
+								placeholder="Stocks"
 								required
 								autoFocus
 								onChange={e => {

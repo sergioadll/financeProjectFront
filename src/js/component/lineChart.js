@@ -8,7 +8,10 @@ import PropTypes from "prop-types";
 
 export const LineChart = props => {
 	const { stockSymbol } = props;
-	//console.log(getTime());
+	console.log(stockSymbol);
+	const [data, setData] = useState("");
+	const [isFetching, setIsFetching] = useState(true);
+
 	const { store, actions } = useContext(Context);
 	const options = {
 		scales: {
@@ -44,53 +47,39 @@ export const LineChart = props => {
 			}
 		}
 	};
+	useEffect(() => {
+		async function loadChartData() {
+			if (store.stockChart[stockSymbol] === undefined) {
+				await actions.loadChart(stockSymbol);
+				setData(store.stockChart[stockSymbol]);
+			} else {
+				setData(store.stockChart[stockSymbol]);
+			}
+			setIsFetching(false);
+		}
+		loadChartData();
+	}, []);
+	const dates = data.t;
+	const dataLine = {
+		labels: dates,
+		datasets: [
+			{
+				fill: false,
+				label: ["Price"],
+				data: data.c,
+				borderColor: "#2493ed",
+				backgroundColor: "#2493ed",
+				borderWidth: "1"
+			}
+		]
+	};
 
-	if (store.Watchlist.s === "ok") {
-		const dates = actions.createDateArray(store.Watchlist.t);
-		//actions.createDateArray(store.Watchlist.t);
-		//console.log(actions.createDateArray(store.Watchlist.t));
-		const dataLine = {
-			labels: dates,
-			datasets: [
-				{
-					fill: false,
-					label: ["Price"],
-					data: store.Watchlist.c,
-					borderColor: "#2493ed",
-					backgroundColor: "#2493ed",
-					borderWidth: "1"
-				}
-			]
-		};
-
-		return (
-			<div className="chart">
-				<Line data={dataLine} options={options} />
-				<div />
-			</div>
-		);
-	} else {
-		const dataLine = {
-			labels: ["We", "Are", "Loading", "Your", "Data", "..."],
-			datasets: [
-				{
-					type: "line",
-					fill: false,
-					label: ["Price"],
-					data: [50, 50, 0, 100, 50, 50],
-					borderColor: "#2493ed",
-					backgroundColor: "#2493ed"
-				}
-			]
-		};
-
-		return (
-			<div className="chart">
-				<Line data={dataLine} options={options} />
-				<div />
-			</div>
-		);
-	}
+	return (
+		<div className="chart">
+			{isFetching && <div className="pl-3 p-5 m-5">Loading Chart...</div>}
+			<Line data={dataLine} options={options} />
+		</div>
+	);
 };
 
 LineChart.propTypes = {
