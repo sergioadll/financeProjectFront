@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
+
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Modal from "react-bootstrap/Modal";
@@ -19,9 +21,9 @@ export const Login = () => {
 				<Button variant="btn btn-outline-success" onClick={handleShow}>
 					Login
 				</Button>
-				<a href="/register" className="btn btn-outline-success">
+				<Link to="/register" className="btn btn-outline-success">
 					Register
-				</a>
+				</Link>
 			</ButtonGroup>
 
 			<Modal show={show} onHide={handleClose}>

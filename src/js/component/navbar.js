@@ -53,10 +53,10 @@ export const Navbar = () => {
 			</div>
 			<div className="navbar navbar-dark bg-dark shadow-sm border-bottom border-primary">
 				<div className="container d-flex justify-content-between">
-					<a href="/" className="navbar-brand d-flex align-items-center">
+					<Link to="/" className="navbar-brand d-flex align-items-center">
 						<i className="far fa-chart-bar" />
 						<strong>finMATH</strong>
-					</a>
+					</Link>
 					<button
 						className="navbar-toggler"
 						type="button"

@@ -17,10 +17,7 @@ export const Card = props => {
 				<div className="card-body">
 					<div className="d-flex justify-content-between align-items-center">
 						<div className="btn-group">
-							<Link
-								to={{ pathname: detailsUrl, stock: stock }}
-								className="btn btn-sm btn-outline-secondary"
-								state={stock}>
+							<Link to={detailsUrl} className="btn btn-sm btn-outline-secondary">
 								View
 							</Link>
 							<button type="button" className="btn btn-sm btn-outline-secondary">

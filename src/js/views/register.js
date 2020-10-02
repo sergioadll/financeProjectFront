@@ -5,6 +5,17 @@ import { Link } from "react-router-dom";
 export const Register = () => {
 	const { actions } = useContext(Context);
 	const [user, setUser] = useState({ email: null, name: null, last_name: null, password: null });
+	const registerUser = () => {
+		if (
+			confirmPassword.value === inputPassword.value &&
+			user.email != null &&
+			user.name != null &&
+			user.last_name != null &&
+			user.password != null
+		) {
+			actions.register(user.email, user.name, user.last_name, user.password);
+		}
+	};
 
 	return (
 		<div className="col-md-12 d-flex justify-content-center">
@@ -12,10 +23,10 @@ export const Register = () => {
 				<div className="card-body">
 					<form
 						className="form-signin"
-						//action="/newaccount"
+						//action="/home"
 						onInput={() => {
 							confirmPassword.setCustomValidity(
-								confirmPassword.value != inputPassword.value ? "Passwords do not match" : ""
+								confirmPassword.value != inputPassword.value ? "Passwords do not match" : "Match"
 							);
 						}}>
 						<div className="text-center mb-4">
@@ -67,7 +78,6 @@ export const Register = () => {
 								onChange={e => {
 									let newEmail = e.target.value;
 									setUser(user => {
-										console.log(newEmail);
 										return { ...user, email: newEmail };
 									});
 								}}
@@ -101,33 +111,16 @@ export const Register = () => {
 								}}
 							/>
 						</div>
-						<button
+						<Link
+							to="/"
 							className="btn btn-lg btn-primary btn-block mt-4"
+							id="register"
 							type="submit"
 							onClick={() => {
-								//console.log("click", user);
-								if (
-									user.email != null &&
-									user.name != null &&
-									user.last_name != null &&
-									user.password != null
-								) {
-									console.log(
-										"registro",
-										typeof user.email,
-										user.email,
-										typeof user.name,
-										user.name,
-										typeof user.last_name,
-										user.last_name,
-										typeof user.password,
-										user.password
-									);
-									actions.register(user.email, user.name, user.last_name, user.password);
-								}
+								registerUser();
 							}}>
 							Register
-						</button>
+						</Link>
 						<p className="mt-3 text-muted text-center">&copy; finMATH 2020 - 2021</p>
 					</form>
 				</div>

@@ -5,29 +5,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: null,
-			Watchlist: [],
 			stockChart: {},
 			watchlists: [{ id: 100, name: "Short-term" }, { id: 101, name: "Long-term" }],
+			watchlistsDefault: [{ id: 100, name: "Short-term" }, { id: 101, name: "Long-term" }],
 			watchlistStocks: [
 				{
 					id: 13972,
-					name: "APPLE INC MOCKUP",
+					name: "APPLE INC",
 					symbol: "AAPL"
 				},
 				{
 					id: 17992,
-					name: "INTL BUSINESS MACHINES CORP MOCKUP",
+					name: "INTL BUSINESS MACHINES CORP",
 					symbol: "IBM"
 				},
 				{
 					id: 23342,
-					name: "TESLA INC MOCKUP",
+					name: "TESLA INC",
 					symbol: "TSLA"
 				}
 			]
 		},
 		actions: {
 			register: async (email, name, last_name, password) => {
+				console.log(name);
 				const urlLogin = urlBase.concat("/register");
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
@@ -45,9 +46,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				try {
 					let res = await fetch(urlLogin, requestOptions);
-					let result = await res.json();
-					let active = await setStore({});
-					console.log("User Registered");
+					let result = await res.text();
+					console.log("User Registered", result);
+					getActions().login(email, password);
 				} catch (error) {
 					console.log("error", error);
 				}
@@ -188,37 +189,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.log("error", error);
 				}
-			},
+			}
 
 			//ACTIONS TO LOAD DATA FROM EXTERNAL APIS
-			loadPrice: async symbol => {
-				const candleSize = "D";
-				const currentDate = Math.round(Date.now() / 1000.0);
-				const initialDate = currentDate - 31556926;
-				const urlStock = "https://finnhub.io/api/v1/stock/candle?symbol=".concat(
-					symbol,
-					"&resolution=",
-					candleSize,
-					"&from=",
-					initialDate,
-					"&to=",
-					currentDate,
-					"&token=bsrbhmf48v6tucpg28a0"
-				);
-				var requestOptions = {
-					method: "GET",
-					redirect: "follow"
-				};
-				try {
-					let res = await fetch(urlStock, requestOptions);
-					let result = await res.json();
-					let active = await setStore({});
-					let price = await result;
-					setStore({ Watchlist: price });
-				} catch (error) {
-					console.log("error", error);
-				}
-			}
 		}
 	};
 };

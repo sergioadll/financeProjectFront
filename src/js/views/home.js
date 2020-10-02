@@ -16,7 +16,6 @@ export const Home = () => {
 	const [key, setKey] = useState();
 	const [watchlistId, setWatchlistId] = useState(store.watchlists[0].id);
 	//chequear parámetro que se le pasa al tab content;
-	//añadir botón + para gregar watchlist
 	//cambiar uso con dos variables. una para el fetch y otra para watchlists default
 	//cambiar. hacer un fetch en lugar de mapear store.
 	const userWatchlists = store.watchlists.map((element, index) => {

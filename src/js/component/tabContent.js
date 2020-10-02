@@ -23,6 +23,9 @@ export const TabContent = props => {
 					await actions.loadStocksFromWatchlists(watchlist);
 					setTabContent(store.watchlistStocks);
 					setIsFetching(false);
+				} else {
+					setTabContent(store.watchlistStocks);
+					setIsFetching(false);
 				}
 			}
 			loadTabContent();
