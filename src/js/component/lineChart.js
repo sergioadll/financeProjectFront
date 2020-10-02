@@ -1,10 +1,9 @@
-import React, { Component } from "react";
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
-import { Bar, Line } from "react-chartjs-2";
-
 import PropTypes from "prop-types";
+
+import { Bar, Line } from "react-chartjs-2";
 
 export const LineChart = props => {
 	const { stockSymbol } = props;
@@ -59,9 +58,8 @@ export const LineChart = props => {
 		}
 		loadChartData();
 	}, []);
-	const dates = data.t;
 	const dataLine = {
-		labels: dates,
+		labels: data.t,
 		datasets: [
 			{
 				fill: false,

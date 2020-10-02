@@ -1,72 +1,89 @@
-import React, { Component } from "react";
-import { useState, useEffect, useContext } from "react";
-import { Bar, Line } from "react-chartjs-2";
+import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
-export const VolumeChart = () => {
-	const { store, actions } = useContext(Context);
-	if (store.Watchlist.s === "ok") {
-		const dates = actions.createDateArray(store.Watchlist.t);
-		//actions.createDateArray(store.Watchlist.t);
-		//console.log(actions.createDateArray(store.Watchlist.t));
-		const optionsVolume = {
-			maintainAspectRatio: false,
-			scales: {
-				xAxes: [
-					{
-						//ticks: { display: false },
-						gridLines: {
-							display: false
-						}
-					}
-				],
-				yAxes: [
-					{
-						ticks: { display: false },
-						gridLines: {
-							display: false
-						}
-					}
-				]
-			},
-			legend: {
-				display: false
-			},
-			elements: {
-				point: {
-					radius: 1.5
-				},
-				line: {
-					tension: 0 // disables bezier curves
-				}
-			},
-			layout: {
-				padding: {
-					right: 20,
-					left: 10
-				}
-			}
-		};
+import PropTypes from "prop-types";
 
-		const dataBar = {
-			labels: dates,
-			datasets: [
+import { Bar, Line } from "react-chartjs-2";
+
+export const VolumeChart = props => {
+	const { stockSymbol } = props;
+
+	const { store, actions } = useContext(Context);
+
+	const [data, setData] = useState("");
+	const [isFetching, setIsFetching] = useState(true);
+
+	const options = {
+		maintainAspectRatio: false,
+		scales: {
+			xAxes: [
 				{
-					type: "bar",
-					label: ["Volume"],
-					data: store.Watchlist.v,
-					backgroundColor: "#EC932F"
+					//ticks: { display: false },
+					gridLines: {
+						display: false
+					}
+				}
+			],
+			yAxes: [
+				{
+					ticks: { display: false },
+					gridLines: {
+						display: false
+					}
 				}
 			]
-		};
+		},
+		legend: {
+			display: false
+		},
+		elements: {
+			point: {
+				radius: 1.5
+			},
+			line: {
+				tension: 0 // disables bezier curves
+			}
+		},
+		layout: {
+			padding: {
+				right: 20,
+				left: 10
+			}
+		}
+	};
 
-		return (
-			<div className="chart">
-				<Bar data={dataBar} options={optionsVolume} />
-				<div />
-			</div>
-		);
-	} else {
-		return <div className="chart">Loading Volumes...</div>;
-	}
+	useEffect(() => {
+		async function loadChartData() {
+			if (store.stockChart[stockSymbol] === undefined) {
+				await actions.loadChart(stockSymbol);
+				setData(store.stockChart[stockSymbol]);
+			} else {
+				setData(store.stockChart[stockSymbol]);
+			}
+			setIsFetching(false);
+		}
+		loadChartData();
+	}, []);
+
+	const dataBar = {
+		labels: data.t,
+		datasets: [
+			{
+				type: "bar",
+				label: ["Volume"],
+				data: data.v,
+				backgroundColor: "#EC932F"
+			}
+		]
+	};
+
+	return (
+		<div className="chart">
+			{isFetching && <div className="pl-3 p-5 m-5">Loading Volumes...</div>}
+			{!isFetching && <Bar data={dataBar} options={options} />}
+		</div>
+	);
+};
+VolumeChart.propTypes = {
+	stockSymbol: PropTypes.string
 };

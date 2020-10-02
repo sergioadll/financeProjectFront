@@ -98,8 +98,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			loadStocksFromWatchlists: async watchlist_id => {
-				//modificar cuando se tenga el endpoint
 				const urlExt = "/watchlist/".concat(watchlist_id.toString());
+				//acortar concats a una linea
 				const urlWatchelement = urlBase.concat(urlExt);
 
 				var myHeaders = new Headers();
@@ -167,6 +167,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					chartData.t = getActions().createDateArray(chartData.t);
 					chartDictionary[symbol] = chartData;
 					setStore({ stockChart: chartDictionary });
+				} catch (error) {
+					console.log("error", error);
+				}
+			},
+
+			loadStockInfo: async symbol => {
+				const urlStock = urlBase.concat("/stock/", symbol);
+
+				var requestOptions = {
+					method: "GET",
+					redirect: "follow"
+				};
+				try {
+					let res = await fetch(urlStock, requestOptions);
+					let result = await res.json();
+					let active = await setStore({});
+					let stock = await result;
+					return stock;
 				} catch (error) {
 					console.log("error", error);
 				}
