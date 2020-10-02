@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 export const LineChart = props => {
 	const { stockSymbol } = props;
-	console.log(stockSymbol);
+	//console.log(stockSymbol);
 	const [data, setData] = useState("");
 	const [isFetching, setIsFetching] = useState(true);
 
@@ -77,7 +77,7 @@ export const LineChart = props => {
 	return (
 		<div className="chart">
 			{isFetching && <div className="pl-3 p-5 m-5">Loading Chart...</div>}
-			<Line data={dataLine} options={options} />
+			{!isFetching && <Line data={dataLine} options={options} />}
 		</div>
 	);
 };

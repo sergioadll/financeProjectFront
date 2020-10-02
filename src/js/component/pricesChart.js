@@ -8,7 +8,7 @@ export const PricesChart = () => {
 	if (store.Watchlist.s === "ok") {
 		const dates = actions.createDateArray(store.Watchlist.t);
 		//actions.createDateArray(store.Watchlist.t);
-		//console.log(actions.createDateArray(store.Watchlist.t));
+		console.log(actions.createDateArray(store.Watchlist.t));
 		const optionsPrice = {
 			scales: {
 				xAxes: [

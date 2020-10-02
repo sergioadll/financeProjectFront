@@ -37,7 +37,7 @@ export const TabContent = props => {
 	return (
 		<CardGroup>
 			{isFetching && <h1>Loading your stocks...</h1>}
-			{cards}
+			{!isFetching && cards}
 		</CardGroup>
 	);
 };

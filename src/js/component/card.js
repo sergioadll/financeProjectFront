@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import { LineChart } from "./lineChart";
 
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
+import { LineChart } from "./lineChart";
 
 export const Card = props => {
 	const { stock } = props;
+	const detailsUrl = "/details/".concat(stock.symbol);
 	return (
 		<div className="col-md-4">
 			<div className="card mb-4 shadow-sm">
@@ -14,9 +17,12 @@ export const Card = props => {
 				<div className="card-body">
 					<div className="d-flex justify-content-between align-items-center">
 						<div className="btn-group">
-							<button type="button" className="btn btn-sm btn-outline-secondary">
+							<Link
+								to={{ pathname: detailsUrl, stock: stock }}
+								className="btn btn-sm btn-outline-secondary"
+								state={stock}>
 								View
-							</button>
+							</Link>
 							<button type="button" className="btn btn-sm btn-outline-secondary">
 								Add to Watchlist
 							</button>
