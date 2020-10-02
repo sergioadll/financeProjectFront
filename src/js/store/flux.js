@@ -6,8 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		store: {
 			token: null,
 			stockChart: {},
-			watchlists: [{ id: 100, name: "Short-term" }, { id: 101, name: "Long-term" }],
-			watchlistsDefault: [{ id: 100, name: "Short-term" }, { id: 101, name: "Long-term" }],
+			watchlists: [{ id: -1, name: "Short-term" }],
 			watchlistStocks: [
 				{
 					id: 13972,
