@@ -69,7 +69,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let result = await res.json();
 					let active = await setStore({});
 					let token = await result;
-					setStore({ token: token.token });
+					await setStore({ token: token.token });
 				} catch (error) {
 					console.log("error", error);
 				}

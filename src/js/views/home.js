@@ -44,7 +44,6 @@ export const Home = () => {
 				onSelect={k => {
 					setKey(k);
 					setWatchlistId(k);
-					console.log("type key", typeof key);
 				}}>
 				{userWatchlists}
 				<Tab key="0" eventKey="0" title="+">
