@@ -165,6 +165,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let active = await setStore({});
 					let chartData = await result;
 					chartData.t = getActions().createDateArray(chartData.t);
+					const chartDictionary = getStore().stockChart;
 					chartDictionary[symbol] = chartData;
 					setStore({ stockChart: chartDictionary });
 				} catch (error) {

@@ -58,6 +58,7 @@ export const LineChart = props => {
 		}
 		loadChartData();
 	}, []);
+	//console.log(data);
 	const dataLine = {
 		labels: data.t,
 		datasets: [
