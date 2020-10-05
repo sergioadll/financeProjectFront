@@ -23,7 +23,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					name: "TESLA INC",
 					symbol: "TSLA"
 				}
-			]
+			],
+			allStocks: []
 		},
 		actions: {
 			register: async (email, name, last_name, password) => {
@@ -186,6 +187,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let active = await setStore({});
 					let stock = await result;
 					return stock;
+				} catch (error) {
+					console.log("error", error);
+				}
+			},
+
+			loadStocksInfo: async () => {
+				const urlStock = urlBase.concat("/stock/");
+
+				var requestOptions = {
+					method: "GET",
+					redirect: "follow"
+				};
+				try {
+					let res = await fetch(urlStock, requestOptions);
+					let result = await res.json();
+					let active = await setStore({});
+					let stocks = await result;
+					setStore({ allStocks: stocks });
 				} catch (error) {
 					console.log("error", error);
 				}

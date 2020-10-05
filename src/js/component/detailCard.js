@@ -14,14 +14,18 @@ export const DetailCard = props => {
 	const [stockInfo, setStockInfo] = useState("");
 	const [isFetching, setIsFetching] = useState(true);
 
-	useEffect(() => {
-		async function loadStock() {
-			const stock = await actions.loadStockInfo(stockSymbol);
-			setStockInfo(stock);
-			setIsFetching(false);
-		}
-		loadStock();
-	}, []);
+	useEffect(
+		() => {
+			async function loadStock() {
+				const stock = await actions.loadStockInfo(stockSymbol);
+				setStockInfo(stock);
+				setIsFetching(false);
+			}
+			loadStock();
+			console.log(stockInfo);
+		},
+		[stockSymbol]
+	);
 	//console.log(stockInfo);
 	return (
 		<div className="col-md-10 justify-content-center">

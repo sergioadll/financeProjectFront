@@ -3,14 +3,15 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./views/home";
-import { Search } from "./component/search.js";
 import { Details } from "./views/details";
 import { Profile } from "./views/profile";
 import { Register } from "./views/register";
 import injectContext from "./store/appContext";
 
+import { Search } from "./component/search.js";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { AutoSearch } from "./component/autocomplete";
 
 //create your first component
 const Layout = () => {
@@ -24,7 +25,7 @@ const Layout = () => {
 				<ScrollToTop>
 					<Navbar />
 					<div className="d-flex justify-content-center">
-						<Search />
+						<AutoSearch />
 					</div>
 
 					<Switch>

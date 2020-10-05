@@ -9,8 +9,12 @@ import { DetailCard } from "../component/detailCard.js";
 
 export const Details = prop => {
 	const stockSymbol = prop.match.params.symbol;
-
-	//console.log("stockinfo", prop);
+	useEffect(
+		() => {
+			//something that makes detailcard rerender
+		},
+		[stockSymbol]
+	);
 	return (
 		<section>
 			<div className="d-flex justify-content-center">
