@@ -16,14 +16,19 @@ export const AutoSearch = () => {
 	}, []);
 	return (
 		<div className="card my-4 bg-light rounded-pill p-0 searchBg">
-			<form className="form-inline my-2 justify-content-center">
+			<form className="form-inline my-1 d-flex justify-content-center">
 				<Autocomplete
 					items={store.allStocks}
 					getItemValue={item => item.symbol}
 					shouldItemRender={(item, value) => item.symbol.toLowerCase().indexOf(value.toLowerCase()) > -1}
+					hideResults={true}
 					renderItem={(item, isHighlighted) => (
-						<div key={item.id} style={{ background: isHighlighted ? "lightgray" : "white" }}>
+						<div
+							key={item.id}
+							className="d-flex px-2"
+							style={{ background: isHighlighted ? "lightgray" : "white" }}>
 							{item.symbol}
+							<span className="ml-auto">{item.name}</span>
 						</div>
 					)}
 					value={value}
@@ -32,16 +37,12 @@ export const AutoSearch = () => {
 						setSymbol("/details/".concat(val));
 						setValue(val);
 					}}
-					className="form-control mr-sm-2 col-9 rounded-pill"
 					inputProps={{
-						placeholder: "Insert Stock Symbol"
+						placeholder: "Insert Stock Symbol",
+						className: "search mr-sm-2 p-2 rounded-pill"
 					}}
 				/>
-				<Link
-					to={symbol}
-					className="btn btn-outline-primary my-2 my-sm-0 rounded-pill"
-					id="submit"
-					type="submit">
+				<Link to={symbol} className="btn btn-outline-primary my-sm-0 rounded-pill" id="submit" type="submit">
 					Go!
 				</Link>
 			</form>
