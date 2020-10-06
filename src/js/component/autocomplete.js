@@ -15,12 +15,15 @@ export const AutoSearch = () => {
 		actions.loadStocksInfo();
 	}, []);
 	return (
-		<div className="card my-4 bg-light rounded-pill p-0 searchBg">
+		<div className="card mb-2 mt-3 bg-light rounded-pill p-0 searchBg">
 			<form className="form-inline my-1 d-flex justify-content-center">
 				<Autocomplete
 					items={store.allStocks}
 					getItemValue={item => item.symbol}
-					shouldItemRender={(item, value) => item.symbol.toLowerCase().indexOf(value.toLowerCase()) > -1}
+					shouldItemRender={(item, value) =>
+						item.symbol.toLowerCase().indexOf(value.toLowerCase()) > -1 ||
+						item.name.toLowerCase().indexOf(value.toLowerCase()) > -1
+					}
 					hideResults={true}
 					renderItem={(item, isHighlighted) => (
 						<div
@@ -38,7 +41,7 @@ export const AutoSearch = () => {
 						setValue(val);
 					}}
 					inputProps={{
-						placeholder: "Insert Stock Symbol",
+						placeholder: "Insert Stock Name or Symbol",
 						className: "search mr-sm-2 p-2 rounded-pill"
 					}}
 				/>
