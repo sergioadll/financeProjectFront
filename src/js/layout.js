@@ -11,7 +11,6 @@ import injectContext from "./store/appContext";
 import { Search } from "./component/search.js";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { AutoSearch } from "./component/autocomplete";
 
 //create your first component
 const Layout = () => {
@@ -24,10 +23,6 @@ const Layout = () => {
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
 					<Navbar />
-					<div className="d-flex justify-content-center">
-						<AutoSearch />
-					</div>
-
 					<Switch>
 						<Route exact path="/">
 							<Home />

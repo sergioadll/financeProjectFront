@@ -6,6 +6,7 @@ import Tab from "react-bootstrap/Tab";
 
 import "../../styles/home.scss";
 
+import { AutoSearch } from "../component/autoSearch";
 import { CreateWatchlist } from "../component/createWatchlist.js";
 import { TabContent } from "../component/tabContent.js";
 
@@ -38,6 +39,7 @@ export const Home = () => {
 
 	return (
 		<section>
+			<AutoSearch />
 			<Tabs
 				id="controlled-tab-example"
 				activeKey={key}

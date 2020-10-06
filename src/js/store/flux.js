@@ -141,6 +141,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const time = Math.round(new Date().getTime() / 1000.0);
 				return time;
 			},
+
+			//ACTIONS TO LOAD DATA FROM EXTERNAL APIS
+
 			loadChart: async symbol => {
 				const candleSize = "D";
 				const currentDate = Math.round(Date.now() / 1000.0);
@@ -209,8 +212,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("error", error);
 				}
 			}
-
-			//ACTIONS TO LOAD DATA FROM EXTERNAL APIS
 		}
 	};
 };
