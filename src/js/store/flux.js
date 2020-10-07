@@ -113,12 +113,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					redirect: "follow"
 				};
 				try {
-					let res = await fetch(urlWatchelement, requestOptions);
-					let result = await res.json();
-					let active = await setStore({});
-					let stocks = await result;
-					setStore({ watchlistStocks: stocks });
-					//console.log("store stocks:    ", stocks);
+					if (watchlist_id > 0) {
+						let res = await fetch(urlWatchelement, requestOptions);
+						let result = await res.json();
+						let active = await setStore({});
+						let stocks = await result;
+						setStore({ watchlistStocks: stocks });
+						//console.log("store stocks:    ", stocks);
+					}
 				} catch (error) {
 					console.log("error", error);
 				}
@@ -142,28 +144,52 @@ const getState = ({ getStore, getActions, setStore }) => {
 				return time;
 			},
 			//ACTIONS TO ADD/MODIFY WATCHLISTS
-			/*addWatchlist: (name, stock)=>{
-                const urlExt="/watchlist"
+			addWatchlist: async watchlist => {
+				const urlExt = "/watchlist";
 				const urlWatchelement = urlBase.concat(urlExt);
 
 				var myHeaders = new Headers();
 				const token = getStore().token;
 				myHeaders.append("X-Access-Tokens", token);
-                var raw = JSON.stringify({"name":name,"stock":stock});
+				myHeaders.append("Content-Type", "application/json");
 				var requestOptions = {
 					method: "POST",
-                    headers: myHeaders,
-                    body: {"name":name,"stock":stock},
+					headers: myHeaders,
+					body: JSON.stringify({ name: watchlist.name, stock: watchlist.stock }),
 					redirect: "follow"
 				};
+
 				try {
 					let res = await fetch(urlWatchelement, requestOptions);
 					let result = await res.text();
-                    console.log(result);
+					console.log(result);
+					getActions().loadWatchlists();
 				} catch (error) {
 					console.log("error", error);
 				}
-            },*/
+			},
+			deleteWatchlist: async watchlist_id => {
+				const urlExt = "/watchlist/".concat(watchlist_id);
+				const urlWatchelement = urlBase.concat(urlExt);
+
+				var myHeaders = new Headers();
+				const token = getStore().token;
+				myHeaders.append("X-Access-Tokens", token);
+				var requestOptions = {
+					method: "DELETE",
+					headers: myHeaders,
+					redirect: "follow"
+				};
+
+				try {
+					let res = await fetch(urlWatchelement, requestOptions);
+					let result = await res.text();
+					console.log(result);
+					getActions().loadWatchlists();
+				} catch (error) {
+					console.log("error", error);
+				}
+			},
 			//ACTIONS TO LOAD DATA FROM EXTERNAL APIS
 
 			loadChart: async symbol => {

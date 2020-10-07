@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
+import { Link } from "react-router-dom";
+
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 
@@ -19,7 +21,21 @@ export const Home = () => {
 	const userWatchlists = store.watchlists.map((element, index) => {
 		index = index + 1;
 		return (
-			<Tab key={index} eventKey={element.id} title={element.name}>
+			<Tab
+				key={index}
+				eventKey={element.id}
+				title={
+					<span>
+						{element.name}
+						<Link
+							to="/"
+							className="btn btn-sm ml-2 p-0 font-weight-bold btn-danger text-light"
+							variant="secondary"
+							onClick={() => actions.deleteWatchlist(element.id)}>
+							x
+						</Link>
+					</span>
+				}>
 				<TabContent watchlist={watchlistId.toString()} />
 			</Tab>
 		);

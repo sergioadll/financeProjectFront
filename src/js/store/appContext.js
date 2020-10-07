@@ -23,8 +23,8 @@ const injectContext = PassedComponent => {
 		useEffect(() => {
 			//state.actions.register("sergio", "sergio", "sergio", "sergio");
 			//state.actions.loadChart("IBM");
-			//state.actions.login("sergio", "sergio");
-			//state.actions.loadStocksInfo("AAP");
+			state.actions.login("sergio", "sergio");
+			//state.actions.addWatchlist("name11", "AAPL");
 		}, []);
 
 		// The initial value for the context is not null anymore, but the current state of this component,

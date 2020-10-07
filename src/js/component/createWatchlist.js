@@ -90,8 +90,10 @@ export const CreateWatchlist = () => {
 								onClick={() => {
 									if (watchlist.name != null && watchlist.stock != null) {
 										console.log("ok");
+										actions.addWatchlist(watchlist);
+										setValue("");
+										document.getElementById("inputName").value = "";
 									}
-									console.log(watchlist);
 								}}>
 								Add
 							</Link>
