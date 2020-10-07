@@ -1,29 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Modal from "react-bootstrap/Modal";
-import { Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Autocomplete from "react-autocomplete";
+import "../../styles/autoAddStock.scss";
 
 export const CreateWatchlist = () => {
-	const { actions } = useContext(Context);
-	const [user, setUser] = useState({ email: null, password: null });
-
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
-
+	const { store, actions } = useContext(Context);
+	const [watchlist, setWatchlist] = useState({ name: null, stock: null });
+	const [value, setValue] = useState("");
+	useEffect(() => {
+		actions.loadStocksInfo();
+	}, []);
 	return (
-		<div className="col-md-12 d-flex justify-content-center">
+		<div className="col-md-12 mt-1 d-flex justify-content-center wide-box">
 			<div className="card col-md-10 mb-4 shadow-sm">
 				<div className="card-body">
-					<form
-						className="form-signin"
-						//action="/newaccount"
-						onInput={() => {
-							confirmPassword.setCustomValidity(
-								confirmPassword.value != inputPassword.value ? "Passwords do not match" : ""
-							);
-						}}>
+					<form className="form-signin">
 						<div className="text-center mb-4">
 							<h1 className="h3 mb-3 font-weight-normal">Add Watchlist</h1>
 						</div>
@@ -32,63 +24,78 @@ export const CreateWatchlist = () => {
 							<input
 								type="name"
 								id="inputName"
-								className="form-control"
+								className="form-control wide-form"
 								placeholder="Name"
 								required
 								autoFocus
 								onChange={e => {
 									let newName = e.target.value;
-									setUser(user => {
-										return { ...user, name: newName };
+									setWatchlist(watchlist => {
+										return { ...watchlist, name: newName };
 									});
 								}}
 							/>
 						</div>
 						<div className="form-label-group">
 							<label htmlFor="inputLastName">Stocks</label>
-							<input
-								type="stocks"
-								id="stocks"
-								className="form-control"
-								placeholder="Stocks"
-								required
-								autoFocus
-								onChange={e => {
-									let newLastName = e.target.value;
-									setUser(user => {
-										return { ...user, last_name: newLastName };
+							<br />
+							<Autocomplete
+								items={store.allStocks}
+								getItemValue={item => item.symbol}
+								shouldItemRender={(item, value) =>
+									item.symbol.toLowerCase().indexOf(value.toLowerCase()) > -1 ||
+									item.name.toLowerCase().indexOf(value.toLowerCase()) > -1
+								}
+								hideResults={true}
+								renderItem={(item, isHighlighted) => (
+									<div
+										key={item.id}
+										className="d-flex px-2"
+										style={{ background: isHighlighted ? "lightgray" : "white" }}>
+										{item.symbol}
+										<span className="ml-auto">{item.name}</span>
+									</div>
+								)}
+								value={value}
+								onChange={e => setValue(e.target.value)}
+								onSelect={val => {
+									setWatchlist(watchlist => {
+										console.log(val);
+										return { ...watchlist, stock: val };
 									});
+									setValue(val);
+								}}
+								menuStyle={{
+									borderRadius: "0.1rem",
+									boxShadow: "0 2px 12px rgba(0, 0, 0, 0.1)",
+									background: "rgba(255, 255, 255, 1)",
+									padding: "0,1rem 0",
+									fontSize: "90%",
+									position: "fixed",
+									overflow: "auto",
+									maxHeight: "20%",
+									zindex: 10000
+								}}
+								inputProps={{
+									placeholder: "Insert Stock Name or Symbol",
+									className: "form-control wide-form",
+									display: "none"
 								}}
 							/>
+							<Link
+								to="/"
+								className="btn btn-lg btn-primary btn-block mt-4 wide-form"
+								id="register"
+								type="submit"
+								onClick={() => {
+									if (watchlist.name != null && watchlist.stock != null) {
+										console.log("ok");
+									}
+									console.log(watchlist);
+								}}>
+								Add
+							</Link>
 						</div>
-						<button
-							className="btn btn-lg btn-primary btn-block mt-4"
-							type="submit"
-							onClick={() => {
-								//console.log("click", user);
-								if (
-									user.email != null &&
-									user.name != null &&
-									user.last_name != null &&
-									user.password != null
-								) {
-									console.log(
-										"registro",
-										typeof user.email,
-										user.email,
-										typeof user.name,
-										user.name,
-										typeof user.last_name,
-										user.last_name,
-										typeof user.password,
-										user.password
-									);
-									actions.register(user.email, user.name, user.last_name, user.password);
-								}
-							}}>
-							Register
-						</button>
-						<p className="mt-3 text-muted text-center">&copy; finMATH 2020 - 2021</p>
 					</form>
 				</div>
 			</div>

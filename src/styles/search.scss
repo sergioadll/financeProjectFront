@@ -6,7 +6,6 @@
     border-style: solid;
     border-width: 0.1rem;
 };
-/*.autocomplete-list {
-    position: relative;
-    z-index: 2;
-};*/
+.on-top {
+    z-index: 10000;
+};

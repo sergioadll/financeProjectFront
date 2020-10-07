@@ -8,7 +8,6 @@ import { Profile } from "./views/profile";
 import { Register } from "./views/register";
 import injectContext from "./store/appContext";
 
-import { Search } from "./component/search.js";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 

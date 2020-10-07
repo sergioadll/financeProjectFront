@@ -48,18 +48,21 @@ export const PricesChart = props => {
 		}
 	};
 
-	useEffect(() => {
-		async function loadChartData() {
-			if (store.stockChart[stockSymbol] === undefined) {
-				await actions.loadChart(stockSymbol);
-				setData(store.stockChart[stockSymbol]);
-			} else {
-				setData(store.stockChart[stockSymbol]);
+	useEffect(
+		() => {
+			async function loadChartData() {
+				if (store.stockChart[stockSymbol] === undefined) {
+					await actions.loadChart(stockSymbol);
+					setData(store.stockChart[stockSymbol]);
+				} else {
+					setData(store.stockChart[stockSymbol]);
+				}
+				setIsFetching(false);
 			}
-			setIsFetching(false);
-		}
-		loadChartData();
-	}, []);
+			loadChartData();
+		},
+		[stockSymbol]
+	);
 
 	const dataLine = {
 		labels: data.t,

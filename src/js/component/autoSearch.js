@@ -11,12 +11,13 @@ export const AutoSearch = () => {
 
 	const [value, setValue] = useState("");
 	const [symbol, setSymbol] = useState("");
+	const urlTo = "/details/";
 	useEffect(() => {
 		actions.loadStocksInfo();
 	}, []);
 	return (
 		<div className="d-flex justify-content-center">
-			<div className="card mb-2 mt-3 bg-light rounded-pill p-0 searchBg">
+			<div className="card mb-2 mt-3 bg-light rounded-pill p-0 searchBg on-top">
 				<form className="form-inline my-1 d-flex justify-content-center">
 					<Autocomplete
 						items={store.allStocks}
@@ -40,6 +41,16 @@ export const AutoSearch = () => {
 						onSelect={val => {
 							setSymbol("/details/".concat(val));
 							setValue(val);
+						}}
+						menuStyle={{
+							borderRadius: "0.1rem",
+							boxShadow: "0 2px 12px rgba(0, 0, 0, 0.1)",
+							background: "rgba(255, 255, 255, 1)",
+							padding: "0.1rem 0",
+							fontSize: "90%",
+							position: "fixed",
+							overflow: "auto",
+							maxHeight: "20%"
 						}}
 						inputProps={{
 							placeholder: "Insert Stock Name or Symbol",

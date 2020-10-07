@@ -141,7 +141,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const time = Math.round(new Date().getTime() / 1000.0);
 				return time;
 			},
+			//ACTIONS TO ADD/MODIFY WATCHLISTS
+			/*addWatchlist: (name, stock)=>{
+                const urlExt="/watchlist"
+				const urlWatchelement = urlBase.concat(urlExt);
 
+				var myHeaders = new Headers();
+				const token = getStore().token;
+				myHeaders.append("X-Access-Tokens", token);
+                var raw = JSON.stringify({"name":name,"stock":stock});
+				var requestOptions = {
+					method: "POST",
+                    headers: myHeaders,
+                    body: {"name":name,"stock":stock},
+					redirect: "follow"
+				};
+				try {
+					let res = await fetch(urlWatchelement, requestOptions);
+					let result = await res.text();
+                    console.log(result);
+				} catch (error) {
+					console.log("error", error);
+				}
+            },*/
 			//ACTIONS TO LOAD DATA FROM EXTERNAL APIS
 
 			loadChart: async symbol => {
