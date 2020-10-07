@@ -1,14 +1,33 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
 
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import { LineChart } from "./lineChart";
+import { AddToWatchlist } from "./addToWatchlist";
+
+import Dropdown from "react-bootstrap/Dropdown";
+
 import "../../styles/card.scss";
 
 export const Card = props => {
-	const { stock } = props;
+	const { stock, watchlist } = props;
+	const { store, actions } = useContext(Context);
+
 	const detailsUrl = "/details/".concat(stock.symbol);
+	const allWatchlists = store.watchlists.map((element, index) => {
+		return (
+			<Dropdown.Item
+				key={index}
+				onClick={() => {
+					alert(stock.symbol + " added to " + element.name);
+					actions.addStockToWatchlist(stock.symbol, element.id);
+				}}>
+				{element.name}
+			</Dropdown.Item>
+		);
+	});
 	return (
 		<div className="col-md-4">
 			<div className="card mb-4 mt-1 shadow">
@@ -17,15 +36,23 @@ export const Card = props => {
 				<LineChart stockSymbol={stock.symbol} />
 				<div className="card-body">
 					<div className="d-flex justify-content-between align-items-center">
-						<div className="btn-group">
+						<Dropdown className="btn-group">
 							<Link to={detailsUrl} className="btn btn-sm btn-outline-secondary">
 								View
 							</Link>
-							<button type="button" className="btn btn-sm btn-outline-secondary">
-								Add to Watchlist
-							</button>
-						</div>
-						<Link type="button" className="text-danger">
+							<Dropdown.Toggle variant="outline-secondary" className="btn btn-sm" id="dropdown-basic">
+								Add to watchlist
+							</Dropdown.Toggle>
+
+							<Dropdown.Menu>{allWatchlists}</Dropdown.Menu>
+						</Dropdown>
+						<Link
+							to=""
+							type="button"
+							className="text-danger"
+							onClick={() => {
+								alert(stock.symbol + watchlist);
+							}}>
 							<i className="fas fa-times fa-2x" />
 						</Link>
 					</div>
@@ -36,5 +63,6 @@ export const Card = props => {
 };
 
 Card.propTypes = {
-	stock: PropTypes.object
+	stock: PropTypes.object,
+	watchlist: PropTypes.string
 };

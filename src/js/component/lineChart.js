@@ -49,7 +49,7 @@ export const LineChart = props => {
 	useEffect(() => {
 		async function loadChartData() {
 			if (store.stockChart[stockSymbol] === undefined) {
-				await actions.loadChart(stockSymbol);
+				await actions.loadChart(stockSymbol, "");
 				setData(store.stockChart[stockSymbol]);
 			} else {
 				setData(store.stockChart[stockSymbol]);

@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 
 import PropTypes from "prop-types";
+import Dropdown from "react-bootstrap/Dropdown";
+import { Link } from "react-router-dom";
 
 import { PricesChart } from "./pricesChart";
 import { VolumeChart } from "./volumeChart";
@@ -13,6 +15,18 @@ export const DetailCard = props => {
 
 	const [stockInfo, setStockInfo] = useState("");
 	const [isFetching, setIsFetching] = useState(true);
+	const allWatchlists = store.watchlists.map((element, index) => {
+		return (
+			<Dropdown.Item
+				key={index}
+				onClick={() => {
+					alert(stockSymbol + " added to " + element.name);
+					actions.addStockToWatchlist(stockSymbol, element.id);
+				}}>
+				{element.name}
+			</Dropdown.Item>
+		);
+	});
 
 	useEffect(
 		() => {
@@ -22,11 +36,9 @@ export const DetailCard = props => {
 				setIsFetching(false);
 			}
 			loadStock();
-			console.log(stockInfo);
 		},
 		[stockSymbol]
 	);
-	//console.log(stockInfo);
 	return (
 		<div className="col-md-10 justify-content-center">
 			<div className="card mb-4 shadow-sm">
@@ -37,12 +49,16 @@ export const DetailCard = props => {
 						<span className="">{stockSymbol}</span>
 					</p>
 					<div className="btn-group">
-						<button type="button" className="btn btn-sm btn-outline-secondary">
-							Analyze (Coming Soon...)
-						</button>
-						<button type="button" className="btn btn-sm btn-outline-secondary">
-							Add to Watchlist
-						</button>
+						<Dropdown className="btn-group">
+							<Link to="" className="btn btn-sm btn-outline-secondary">
+								Analyze
+							</Link>
+							<Dropdown.Toggle variant="outline-secondary" className="btn btn-sm" id="dropdown-basic">
+								Add to watchlist
+							</Dropdown.Toggle>
+
+							<Dropdown.Menu>{allWatchlists}</Dropdown.Menu>
+						</Dropdown>
 					</div>
 				</div>
 

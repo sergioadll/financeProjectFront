@@ -190,13 +190,39 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("error", error);
 				}
 			},
+			addStockToWatchlist: async (symbol, watchlist_id) => {
+				const urlExt = "/watchlist/".concat(watchlist_id);
+				const urlWatchelement = urlBase.concat(urlExt);
+
+				var myHeaders = new Headers();
+				const token = getStore().token;
+				myHeaders.append("X-Access-Tokens", token);
+				myHeaders.append("Content-Type", "application/json");
+
+				var requestOptions = {
+					method: "PUT",
+					headers: myHeaders,
+					body: JSON.stringify({ stock: symbol }),
+					redirect: "follow"
+				};
+
+				try {
+					let res = await fetch(urlWatchelement, requestOptions);
+					let result = await res.text();
+					console.log(result);
+					getActions().loadWatchlists();
+				} catch (error) {
+					console.log("error", error);
+				}
+			},
 			//ACTIONS TO LOAD DATA FROM EXTERNAL APIS
 
-			loadChart: async symbol => {
+			loadChart: async (symbol, indicator) => {
 				const candleSize = "D";
 				const currentDate = Math.round(Date.now() / 1000.0);
 				const initialDate = currentDate - 31556926;
-				const urlStock = "https://finnhub.io/api/v1/stock/candle?symbol=".concat(
+				("AAPL&resolution=D&from=1583098857&to=1584308457&indicator=wma");
+				const urlStock = "https://finnhub.io/api/v1/indicator?symbol=".concat(
 					symbol,
 					"&resolution=",
 					candleSize,
@@ -204,6 +230,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initialDate,
 					"&to=",
 					currentDate,
+					"&indicator=",
+					indicator,
+					"&timeperiod=14",
 					"&token=bsrbhmf48v6tucpg28a0"
 				);
 				let chartDictionary = {};
@@ -224,7 +253,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("error", error);
 				}
 			},
-
+			// ACTIONS TO LOAD STOCK INFO FROM OUR DATABASE
 			loadStockInfo: async symbol => {
 				const urlStock = urlBase.concat("/stock/", symbol);
 

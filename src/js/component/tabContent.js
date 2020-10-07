@@ -34,7 +34,7 @@ export const TabContent = props => {
 	);
 
 	const cards = tabContent.map((element, index) => {
-		return <Card key={element.id} stock={element} />;
+		return <Card key={element.id} stock={element} watchlist={watchlist} />;
 	});
 
 	return (
