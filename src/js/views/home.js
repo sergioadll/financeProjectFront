@@ -29,10 +29,10 @@ export const Home = () => {
 						{element.name}
 						<Link
 							to="/"
-							className="btn btn-sm ml-2 p-0 font-weight-bold btn-danger text-light"
+							className="ml-3 p-0 text-danger"
 							variant="secondary"
 							onClick={() => actions.deleteWatchlist(element.id)}>
-							x
+							<i className="far fa-trash-alt" />
 						</Link>
 					</span>
 				}>

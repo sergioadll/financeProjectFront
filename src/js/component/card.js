@@ -25,9 +25,9 @@ export const Card = props => {
 								Add to Watchlist
 							</button>
 						</div>
-						<button type="button" className="btn btn-sm font-weight-bold btn-danger text-light">
-							X
-						</button>
+						<Link type="button" className="text-danger">
+							<i className="fas fa-times fa-2x" />
+						</Link>
 					</div>
 				</div>
 			</div>
