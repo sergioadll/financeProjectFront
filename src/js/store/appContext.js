@@ -23,7 +23,7 @@ const injectContext = PassedComponent => {
 		useEffect(() => {
 			//state.actions.register("sergio", "sergio", "sergio", "sergio");
 			//state.actions.loadChart("IBM");
-			state.actions.login("sergio", "sergio");
+			//state.actions.login("sergio", "sergio");
 			//state.actions.addWatchlist("name11", "AAPL");
 		}, []);
 
