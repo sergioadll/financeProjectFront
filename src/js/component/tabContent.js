@@ -29,8 +29,11 @@ export const TabContent = props => {
 				}
 			}
 			loadTabContent();
+			console.log("im rerendering this shit tabcontent");
+			console.log(tabContent);
 		},
-		[watchlist]
+		[watchlist],
+		[store.watchlistStocks.length]
 	);
 
 	const cards = tabContent.map((element, index) => {

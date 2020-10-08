@@ -215,6 +215,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("error", error);
 				}
 			},
+			deleteStockFromWatchlist: async (watchlist_id, stock_symbol) => {
+				const urlExt = "/watchlist/".concat(watchlist_id, "/", stock_symbol);
+				const urlWatchelement = urlBase.concat(urlExt);
+
+				var myHeaders = new Headers();
+				const token = getStore().token;
+				myHeaders.append("X-Access-Tokens", token);
+				var requestOptions = {
+					method: "PUT",
+					headers: myHeaders,
+					redirect: "follow"
+				};
+
+				try {
+					let res = await fetch(urlWatchelement, requestOptions);
+					let result = await res.text();
+					console.log(result);
+					getActions().loadStocksFromWatchlists(watchlist_id);
+				} catch (error) {
+					console.log("error", error);
+				}
+			},
 			//ACTIONS TO LOAD DATA FROM EXTERNAL APIS
 
 			loadChart: async (symbol, indicator) => {

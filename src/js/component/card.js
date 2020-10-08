@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 import { LineChart } from "./lineChart";
-import { AddToWatchlist } from "./addToWatchlist";
 
 import Dropdown from "react-bootstrap/Dropdown";
 
@@ -52,6 +51,7 @@ export const Card = props => {
 							className="text-danger"
 							onClick={() => {
 								alert(stock.symbol + watchlist);
+								actions.deleteStockFromWatchlist(watchlist, stock.symbol);
 							}}>
 							<i className="fas fa-times fa-2x" />
 						</Link>
