@@ -8,24 +8,52 @@ import Modal from "react-bootstrap/Modal";
 import { Container } from "react-bootstrap";
 
 export const Login = () => {
-	const { actions } = useContext(Context);
+	const { store, actions } = useContext(Context);
 	const [show, setShow] = useState(false);
 	const [user, setUser] = useState({ email: null, password: null });
+	const [login, setLogin] = useState(
+		<ButtonGroup>
+			<Link to="/register" className="btn btn-outline-success">
+				Register
+			</Link>
+			<Button
+				variant="btn btn-outline-success"
+				onClick={() => {
+					handleShow();
+				}}>
+				Login
+			</Button>
+		</ButtonGroup>
+	);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
+	useEffect(
+		() => {
+			if (store.userInfo != "") {
+				setLogin(
+					<ButtonGroup>
+						<Link to="/" className="btn btn-outline-success">
+							{store.userInfo}
+						</Link>
+						<Button
+							variant="btn btn-outline-danger"
+							onClick={() => {
+								window.location.reload();
+							}}>
+							Logout
+						</Button>
+					</ButtonGroup>
+				);
+			}
+		},
+		[store.userInfo]
+	);
+
 	return (
 		<Container>
-			<ButtonGroup>
-				<Button variant="btn btn-outline-success" onClick={handleShow}>
-					Login
-				</Button>
-				<Link to="/register" className="btn btn-outline-success">
-					Register
-				</Link>
-			</ButtonGroup>
-
+			{login}
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
 					<Modal.Title>Login</Modal.Title>

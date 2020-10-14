@@ -28,7 +28,7 @@ export const Card = props => {
 		);
 	});
 	return (
-		<div className="col-md-4">
+		<div className="col-md-4" id={stock.id}>
 			<div className="card mb-4 mt-1 shadow">
 				<p className="card-text pl-3 pt-2">{stock.name}</p>
 				<p className="card-text pl-3 pt-2">{stock.symbol}</p>

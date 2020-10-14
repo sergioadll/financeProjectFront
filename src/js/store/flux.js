@@ -5,6 +5,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: null,
+			userInfo: "",
 			stockChart: {},
 			watchlists: [{ id: -1, name: "Short-term" }],
 			watchlistStocks: [
@@ -70,7 +71,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let result = await res.json();
 					let active = await setStore({});
 					let token = await result;
-					await setStore({ token: token.token });
+					setStore({ token: token.token });
+					setStore({ userInfo: email });
 				} catch (error) {
 					console.log("error", error);
 				}
@@ -227,12 +229,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					headers: myHeaders,
 					redirect: "follow"
 				};
-
 				try {
 					let res = await fetch(urlWatchelement, requestOptions);
 					let result = await res.text();
 					console.log(result);
-					getActions().loadStocksFromWatchlists(watchlist_id);
+					const newStocks = getStore().watchlistStocks.filter(stocks => stocks.symbol != stock_symbol);
+					setStore({ watchlistStocks: newStocks });
 				} catch (error) {
 					console.log("error", error);
 				}
