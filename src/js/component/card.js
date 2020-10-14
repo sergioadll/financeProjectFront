@@ -61,7 +61,7 @@ export const Card = props => {
 									alert("Please, login or register to modify a watchlist");
 								}
 							}}>
-							<i className="fas fa-times fa-2x" />
+							<i className="fas fa-times fa-md" />
 						</Link>
 					</div>
 				</div>

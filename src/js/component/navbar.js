@@ -8,7 +8,6 @@ export const Navbar = () => {
 
 	const changeMenu = () => {
 		setShowMenu(showMenu => !showMenu);
-		console.log(showMenu);
 		if (showMenu == true) {
 			setDropMenu("bg-dark");
 		} else {
