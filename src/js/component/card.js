@@ -20,8 +20,12 @@ export const Card = props => {
 			<Dropdown.Item
 				key={index}
 				onClick={() => {
-					alert(stock.symbol + " added to " + element.name);
-					actions.addStockToWatchlist(stock.symbol, element.id);
+					if (store.token != null) {
+						alert(stock.symbol + " added to " + element.name);
+						actions.addStockToWatchlist(stock.symbol, element.id);
+					} else {
+						alert("Please, login or register to modify a watchlist");
+					}
 				}}>
 				{element.name}
 			</Dropdown.Item>
@@ -50,8 +54,12 @@ export const Card = props => {
 							type="button"
 							className="text-danger"
 							onClick={() => {
-								alert(stock.symbol + watchlist);
-								actions.deleteStockFromWatchlist(watchlist, stock.symbol);
+								if (store.token != null) {
+									alert(stock.name + " deleted from this watchlist");
+									actions.deleteStockFromWatchlist(watchlist, stock.symbol);
+								} else {
+									alert("Please, login or register to modify a watchlist");
+								}
 							}}>
 							<i className="fas fa-times fa-2x" />
 						</Link>

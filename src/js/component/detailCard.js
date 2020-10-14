@@ -20,8 +20,12 @@ export const DetailCard = props => {
 			<Dropdown.Item
 				key={index}
 				onClick={() => {
-					alert(stockSymbol + " added to " + element.name);
-					actions.addStockToWatchlist(stockSymbol, element.id);
+					if (store.token != null) {
+						alert(stockSymbol + " added to " + element.name);
+						actions.addStockToWatchlist(stockSymbol, element.id);
+					} else {
+						alert("Please, login or register to modify a watchlist");
+					}
 				}}>
 				{element.name}
 			</Dropdown.Item>

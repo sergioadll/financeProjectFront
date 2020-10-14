@@ -37,7 +37,7 @@ export const CreateWatchlist = () => {
 							/>
 						</div>
 						<div className="form-label-group">
-							<label htmlFor="inputLastName">Stocks</label>
+							<label htmlFor="inputLastName">Stock</label>
 							<br />
 							<Autocomplete
 								items={store.allStocks}
@@ -88,11 +88,12 @@ export const CreateWatchlist = () => {
 								id="register"
 								type="submit"
 								onClick={() => {
-									if (watchlist.name != null && watchlist.stock != null) {
-										console.log("ok");
+									if (watchlist.name != null && watchlist.stock != null && store.token != null) {
 										actions.addWatchlist(watchlist);
 										setValue("");
 										document.getElementById("inputName").value = "";
+									} else if (store.token == null) {
+										alert("Please, login or register to add a watchlist!");
 									}
 								}}>
 								Add
