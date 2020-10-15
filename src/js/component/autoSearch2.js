@@ -6,13 +6,11 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Autocomplete from "react-autocomplete";
 import "../../styles/search.scss";
 
-export const AutoSearch = () => {
+export const AutoSearch2 = () => {
 	const { store, actions } = useContext(Context);
 
 	const [value, setValue] = useState("");
-	const debouncedSearchTerm = useDebounce(value, 500);
 	const [symbol, setSymbol] = useState("");
-
 	useEffect(() => {
 		actions.loadStocksInfo();
 	}, []);
@@ -23,9 +21,9 @@ export const AutoSearch = () => {
 					<Autocomplete
 						items={store.allStocks}
 						getItemValue={item => item.symbol}
-						shouldItemRender={(item, debouncedSearchTerm) =>
-							item.symbol.toLowerCase().indexOf(debouncedSearchTerm.toLowerCase()) > -1 ||
-							item.name.toLowerCase().indexOf(debouncedSearchTerm.toLowerCase()) > -1
+						shouldItemRender={(item, value) =>
+							item.symbol.toLowerCase().indexOf(value.toLowerCase()) > -1 ||
+							item.name.toLowerCase().indexOf(value.toLowerCase()) > -1
 						}
 						hideResults={true}
 						renderItem={(item, isHighlighted) => (
@@ -68,20 +66,5 @@ export const AutoSearch = () => {
 				</form>
 			</div>
 		</div>
-	);
-	function useDebounce(value, delay) {
-		const [debouncedValue, setDebouncedValue] = useState(value);
-		useEffect(
-			() => {
-				const handler = setTimeout(() => {
-					setDebouncedValue(value);
-				}, delay);
-				return () => {
-					clearTimeout(handler);
-				};
-			},
-			[value, delay] // Only re-call effect if value or delay changes
-		);
-		return debouncedValue;
-	}
+    );
 };
