@@ -65,7 +65,7 @@ export const Home = () => {
 				}}>
 				{userWatchlists}
 				<Tab key="0" eventKey="0" title="+">
-					<CreateWatchlist />
+					<CreateWatchlist className="d-flex justify-content-center" />
 				</Tab>
 			</Tabs>
 		</section>

@@ -12,8 +12,9 @@
 };
 .searchDropdown {
     width: 25rem;
-    background-color: white;
     max-height: 7rem;
+    background-color: white !important;
+    opacity: 0.9;
     overflow: auto;
 }
 .legend{

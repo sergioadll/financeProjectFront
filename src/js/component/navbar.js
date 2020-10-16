@@ -37,7 +37,9 @@ export const Navbar = () => {
 									</a>
 								</li>
 								<li>
-									<a href="#" className="text-white">
+									<a
+										href="https://www.linkedin.com/in/%E2%99%98fernando-m-21162949/"
+										className="text-white">
 										Fernando Manrique
 									</a>
 								</li>
@@ -47,11 +49,7 @@ export const Navbar = () => {
 				</div>
 			</div>
 			<div className="navbar navbar-dark bg-dark shadow-sm border-bottom border-primary">
-				<div className="container d-flex justify-content-between">
-					<Link to="/" className="navbar-brand d-flex align-items-center">
-						<i className="far fa-chart-bar" />
-						<strong>finMATH</strong>
-					</Link>
+				<div className="container d-flex mx-0 px-0 ">
 					<button
 						className="navbar-toggler"
 						type="button"
@@ -67,7 +65,11 @@ export const Navbar = () => {
 							}}
 						/>
 					</button>
-					<div className="btn-group">
+					<Link to="/" className="navbar-brand d-flex align-items-center">
+						<i className="far fa-chart-bar" />
+						<strong>finMATH</strong>
+					</Link>
+					<div className="btn-group justify-content-end">
 						<Login />
 					</div>
 				</div>

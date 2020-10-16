@@ -42,8 +42,8 @@ export const AutoSearch = () => {
 						res = <div>Not found...</div>;
 					}
 					setResults(
-						<div>
-							<div className="d-flex px-2 legend">
+						<div className="">
+							<div className="d-flex px-2 legend ">
 								Symbol
 								<span className="ml-auto">Name</span>
 							</div>
@@ -61,7 +61,7 @@ export const AutoSearch = () => {
 	);
 	return (
 		<div className="d-flex justify-content-center">
-			<div className="card mb-2 mt-3 bg-light rounded-pill p-0 searchBg">
+			<div className="card mb-4 mt-4 bg-light rounded-pill p-0 searchBg">
 				<form className="form-inline my-1 d-flex justify-content-center">
 					<div className="on-top">
 						<input
