@@ -295,7 +295,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("error", error);
 				}
 			},
+			// LOADS STOCKS STARTING BY...
+			loadStocksStartingWith: async search => {
+				const urlStock = urlBase.concat("/stocks/", search);
 
+				var requestOptions = {
+					method: "GET",
+					redirect: "follow"
+				};
+				try {
+					let res = await fetch(urlStock, requestOptions);
+					let result = await res.json();
+					let active = await setStore({});
+					let stocks = await result;
+					return stocks;
+					//setStore({ allStocks: stocks });
+				} catch (error) {
+					console.log("error", error);
+				}
+			},
+			// LOADS ALL STOCKS
 			loadStocksInfo: async () => {
 				const urlStock = urlBase.concat("/stock/");
 

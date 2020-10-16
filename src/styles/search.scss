@@ -1,5 +1,6 @@
 .searchBg {
     width: 30rem;
+    height: 3.3rem;
 };
 .search {
     width: 25rem;
@@ -9,3 +10,12 @@
 .on-top {
     z-index: 1045;
 };
+.searchDropdown {
+    width: 25rem;
+    background-color: white;
+    max-height: 7rem;
+    overflow: auto;
+}
+.legend{
+    color: grey;
+}
