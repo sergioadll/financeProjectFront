@@ -13,11 +13,11 @@ export const Login = () => {
 	const [user, setUser] = useState({ email: null, password: null });
 	const [login, setLogin] = useState(
 		<ButtonGroup>
-			<Link to="/register" className="btn btn-outline-success">
+			<Link to="/register" className="btn btn-outline-success text-light">
 				Register
 			</Link>
 			<Button
-				variant="btn btn-outline-success"
+				variant="btn btn-outline-success text-light"
 				onClick={() => {
 					handleShow();
 				}}>
@@ -34,11 +34,11 @@ export const Login = () => {
 			if (store.userInfo != "") {
 				setLogin(
 					<ButtonGroup>
-						<Link to="/" className="btn btn-outline-success">
+						<Link to="/" className="btn btn-outline-success text-light">
 							{store.userInfo}
 						</Link>
 						<Button
-							variant="btn btn-outline-danger"
+							variant="btn btn-outline-danger text-light"
 							onClick={() => {
 								window.location.reload();
 							}}>

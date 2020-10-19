@@ -20,6 +20,18 @@ export const Home = () => {
 	const [watchlistId, setWatchlistId] = useState(store.watchlists[0].id);
 	const userWatchlists = store.watchlists.map((element, index) => {
 		index = index + 1;
+		let deleteButton = "";
+		if (index != 1) {
+			deleteButton = (
+				<Link
+					to="/"
+					className="ml-3 p-0 text-danger"
+					variant="secondary"
+					onClick={() => actions.deleteWatchlist(element.id)}>
+					<i className="far fa-trash-alt" />
+				</Link>
+			);
+		}
 		return (
 			<Tab
 				key={index}
@@ -27,13 +39,7 @@ export const Home = () => {
 				title={
 					<span>
 						{element.name}
-						<Link
-							to="/"
-							className="ml-3 p-0 text-danger"
-							variant="secondary"
-							onClick={() => actions.deleteWatchlist(element.id)}>
-							<i className="far fa-trash-alt" />
-						</Link>
+						{deleteButton}
 					</span>
 				}>
 				<TabContent watchlist={watchlistId.toString()} />
