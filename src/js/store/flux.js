@@ -1,6 +1,6 @@
 import { encode } from "base-64";
 
-const urlBase = "https://3000-d3c8026a-6f54-48fc-83f7-c9e1ffc4cc40.ws-eu01.gitpod.io/";
+const urlBase = "https://finmath1.herokuapp.com/";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
