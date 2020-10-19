@@ -16,22 +16,19 @@ export const TabContent = props => {
 	const [tabContent, setTabContent] = useState(store.watchlistStocks);
 	const [isFetching, setIsFetching] = useState(true);
 
-	useEffect(
-		() => {
-			async function loadTabContent() {
-				if (store.token != null) {
-					await actions.loadStocksFromWatchlists(watchlist);
-					setTabContent(store.watchlistStocks);
-					setIsFetching(false);
-				} else {
-					setTabContent(store.watchlistStocks);
-					setIsFetching(false);
-				}
+	useEffect(() => {
+		async function loadTabContent() {
+			if (store.token != null) {
+				await actions.loadStocksFromWatchlists(watchlist);
+				setTabContent(store.watchlistStocks);
+				setIsFetching(false);
+			} else {
+				setTabContent(store.watchlistStocks);
+				setIsFetching(false);
 			}
-			loadTabContent();
-		},
-		[watchlist, store.watchlistStocks.length]
-	);
+		}
+		loadTabContent();
+	}, [watchlist, store.watchlistStocks.length]);
 
 	const cards = tabContent.map((element, index) => {
 		return <Card key={element.id} stock={element} watchlist={watchlist} />;

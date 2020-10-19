@@ -10,12 +10,9 @@ import { DetailCard } from "../component/detailCard.js";
 
 export const Details = prop => {
 	const stockSymbol = prop.match.params.symbol;
-	useEffect(
-		() => {
-			//something that makes detailcard rerender
-		},
-		[stockSymbol]
-	);
+	useEffect(() => {
+		//something that makes detailcard rerender
+	}, [stockSymbol]);
 	return (
 		<section>
 			<AutoSearch />

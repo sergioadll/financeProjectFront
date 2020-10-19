@@ -46,18 +46,15 @@ export const Home = () => {
 			</Tab>
 		);
 	});
-	useEffect(
-		() => {
-			async function loadUserWatchlists() {
-				if (store.token != null) {
-					await actions.loadWatchlists();
-					setWatchlistId(store.watchlists[0].id);
-				}
+	useEffect(() => {
+		async function loadUserWatchlists() {
+			if (store.token != null) {
+				await actions.loadWatchlists();
+				setWatchlistId(store.watchlists[0].id);
 			}
-			loadUserWatchlists();
-		},
-		[store.token]
-	);
+		}
+		loadUserWatchlists();
+	}, [store.token]);
 
 	return (
 		<section>

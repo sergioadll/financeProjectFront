@@ -29,27 +29,24 @@ export const Login = () => {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
-	useEffect(
-		() => {
-			if (store.userInfo != "") {
-				setLogin(
-					<ButtonGroup>
-						<Link to="/" className="btn btn-outline-success text-light">
-							{store.userInfo}
-						</Link>
-						<Button
-							variant="btn btn-outline-danger text-light"
-							onClick={() => {
-								window.location.reload();
-							}}>
-							Logout
-						</Button>
-					</ButtonGroup>
-				);
-			}
-		},
-		[store.userInfo]
-	);
+	useEffect(() => {
+		if (store.userInfo != "") {
+			setLogin(
+				<ButtonGroup>
+					<Link to="/" className="btn btn-outline-success text-light">
+						{store.userInfo}
+					</Link>
+					<Button
+						variant="btn btn-outline-danger text-light"
+						onClick={() => {
+							window.location.reload();
+						}}>
+						Logout
+					</Button>
+				</ButtonGroup>
+			);
+		}
+	}, [store.userInfo]);
 
 	return (
 		<Container>

@@ -32,17 +32,14 @@ export const DetailCard = props => {
 		);
 	});
 
-	useEffect(
-		() => {
-			async function loadStock() {
-				const stock = await actions.loadStockInfo(stockSymbol);
-				setStockInfo(stock);
-				setIsFetching(false);
-			}
-			loadStock();
-		},
-		[stockSymbol]
-	);
+	useEffect(() => {
+		async function loadStock() {
+			const stock = await actions.loadStockInfo(stockSymbol);
+			setStockInfo(stock);
+			setIsFetching(false);
+		}
+		loadStock();
+	}, [stockSymbol]);
 	return (
 		<div className="col-md-10 justify-content-center">
 			<div className="card mb-4 shadow-sm">

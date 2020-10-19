@@ -11,54 +11,51 @@ export const CreateWatchlist = () => {
 	const [results, setResults] = useState("");
 	const [isFetching, setIsFetching] = useState(false);
 	const [search, setSearch] = useState(true);
-	useEffect(
-		() => {
-			async function loadChartData() {
-				let res = null;
-				let searchValue = debouncedValue.replaceAll("/", " ");
-				searchValue = debouncedValue.trim();
-				if (searchValue != "" && search) {
-					setIsFetching(true);
-					console.log(searchValue);
-					const stocks = await actions.loadStocksStartingWith(searchValue);
-					if (stocks.length != 0) {
-						res = await stocks.map((element, index) => (
-							<div
-								key={element.id}
-								className="d-flex px-2"
-								onClick={e => {
-									setSearch(false);
-									setValue(element.name);
-									setWatchlist(watchlist => {
-										console.log(element.symbol);
-										return { ...watchlist, stock: element.symbol };
-									});
-								}}>
-								{element.symbol}
-								<span className="ml-auto">{element.name}</span>
-							</div>
-						));
-					} else {
-						res = <div>Not found...</div>;
-					}
-					setResults(
-						<div className="">
-							<div className="d-flex px-2 legend ">
-								Symbol
-								<span className="ml-auto">Name</span>
-							</div>
-							{res}
+	useEffect(() => {
+		async function loadChartData() {
+			let res = null;
+			let searchValue = debouncedValue.replaceAll("/", " ");
+			searchValue = debouncedValue.trim();
+			if (searchValue != "" && search) {
+				setIsFetching(true);
+				console.log(searchValue);
+				const stocks = await actions.loadStocksStartingWith(searchValue);
+				if (stocks.length != 0) {
+					res = await stocks.map((element, index) => (
+						<div
+							key={element.id}
+							className="d-flex px-2"
+							onClick={e => {
+								setSearch(false);
+								setValue(element.name);
+								setWatchlist(watchlist => {
+									console.log(element.symbol);
+									return { ...watchlist, stock: element.symbol };
+								});
+							}}>
+							{element.symbol}
+							<span className="ml-auto">{element.name}</span>
 						</div>
-					);
-					setIsFetching(false);
+					));
 				} else {
-					setResults("");
+					res = <div>Not found...</div>;
 				}
+				setResults(
+					<div className="">
+						<div className="d-flex px-2 legend ">
+							Symbol
+							<span className="ml-auto">Name</span>
+						</div>
+						{res}
+					</div>
+				);
+				setIsFetching(false);
+			} else {
+				setResults("");
 			}
-			loadChartData();
-		},
-		[debouncedValue]
-	);
+		}
+		loadChartData();
+	}, [debouncedValue]);
 	return (
 		<div className="col-md-12 d-flex justify-content-center wide-box">
 			<div className="card col-md-10 mb-4 shadow-sm ">
@@ -96,7 +93,7 @@ export const CreateWatchlist = () => {
 									setSearch(true);
 								}}
 							/>
-							{isFetching && <div>Searching ...</div>}
+							{isFetching && <div className="searchDropdown px-2 legend">Searching ...</div>}
 							<div className="searchDropdown">{results}</div>
 						</div>
 						<Link
