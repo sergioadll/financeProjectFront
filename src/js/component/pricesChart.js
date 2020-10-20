@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 
 import { Bar, Line } from "react-chartjs-2";
 
+//import "../../styles/detailChart.scss";
+
 export const PricesChart = props => {
 	const { stockSymbol } = props;
 
@@ -12,9 +14,10 @@ export const PricesChart = props => {
 
 	const [data, setData] = useState("");
 	const [isFetching, setIsFetching] = useState(true);
-
 	const options = {
 		scales: {
+			//responsive: true,
+			//maintainAspectRatio: false, //allow distorsion
 			xAxes: [
 				{
 					ticks: { display: false },
@@ -75,7 +78,7 @@ export const PricesChart = props => {
 	};
 
 	return (
-		<div className="chart">
+		<div className="line-chart">
 			{isFetching && <div className="pl-3 p-5 m-5">Loading Chart...</div>}
 			{!isFetching && <Line data={dataLine} options={options} />}
 		</div>

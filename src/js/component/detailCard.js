@@ -31,7 +31,6 @@ export const DetailCard = props => {
 			</Dropdown.Item>
 		);
 	});
-
 	useEffect(() => {
 		async function loadStock() {
 			const stock = await actions.loadStockInfo(stockSymbol);
@@ -41,7 +40,7 @@ export const DetailCard = props => {
 		loadStock();
 	}, [stockSymbol]);
 	return (
-		<div className="col-md-10 justify-content-center">
+		<div className="col-md-8 justify-content-center">
 			<div className="card mb-4 shadow-sm">
 				<div className="card-body pt-0" />
 				<div className="d-flex justify-content-between align-items-center px-4">
@@ -65,13 +64,6 @@ export const DetailCard = props => {
 
 				<PricesChart stockSymbol={stockSymbol} />
 				<VolumeChart stockSymbol={stockSymbol} />
-
-				<div className="card-body">
-					<p className="card-text">
-						This is a wider card with supporting text below as a natural lead-in to additional content. This
-						content is a little bit longer.
-					</p>
-				</div>
 			</div>
 		</div>
 	);

@@ -11,6 +11,7 @@ import { DetailCard } from "../component/detailCard.js";
 export const Details = prop => {
 	const stockSymbol = prop.match.params.symbol;
 	useEffect(() => {
+		window.scrollBy(0, 200); //to scroll down when loaded
 		//something that makes detailcard rerender
 	}, [stockSymbol]);
 	return (

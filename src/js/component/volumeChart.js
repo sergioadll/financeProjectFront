@@ -3,8 +3,9 @@ import { Context } from "../store/appContext";
 
 import PropTypes from "prop-types";
 
-import { Bar, Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
+import "../../styles/detailChart.scss";
 export const VolumeChart = props => {
 	const { stockSymbol } = props;
 
@@ -78,7 +79,7 @@ export const VolumeChart = props => {
 	};
 
 	return (
-		<div className="chart">
+		<div className="volume-chart">
 			{isFetching && <div className="pl-3 p-5 m-5">Loading Volumes...</div>}
 			{!isFetching && <Bar data={dataBar} options={options} />}
 		</div>

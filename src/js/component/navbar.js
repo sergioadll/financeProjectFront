@@ -20,8 +20,8 @@ export const Navbar = () => {
 			<div className={dropMenu} id="navbarHeader">
 				<div className="row">
 					<div className="col-sm-8 col-md-7 py-4">
-						<h4 className="text-white">About</h4>
-						<p className="text-muted">
+						<h4 className="text-white ml-3">About</h4>
+						<p className="text-muted ml-3">
 							With finMATH, you will be able to keep track of your favourite stocks and make trading
 							decisions based on chart analysis. Our next goal is to include machine learning algorithms
 							to assist in your decision making process.
