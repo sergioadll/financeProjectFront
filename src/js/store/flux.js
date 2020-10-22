@@ -1,6 +1,6 @@
 import { encode } from "base-64";
 
-const urlBase = "https://3000-e3d7b37e-ec61-4085-bceb-2b603bfcfb6c.ws-eu01.gitpod.io";
+const urlBase = process.env.BACKEND_URL;
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {

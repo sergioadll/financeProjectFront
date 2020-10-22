@@ -50,7 +50,7 @@ export const DetailCard = props => {
 					</p>
 					<div className="btn-group">
 						<Dropdown className="btn-group">
-							<Link to="" className="btn btn-sm btn-outline-secondary">
+							<Link to="" className=" disabled btn btn-sm btn-outline-secondary">
 								Analyze
 							</Link>
 							<Dropdown.Toggle variant="outline-secondary" className="btn btn-sm" id="dropdown-basic">
