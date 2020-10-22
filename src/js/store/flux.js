@@ -1,6 +1,5 @@
 import { encode } from "base-64";
 
-const urlBase = process.env.BACKEND_URL;
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -30,7 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			register: async (email, name, last_name, password) => {
 				console.log(name);
-				const urlLogin = urlBase.concat("/register");
+				const urlLogin = process.env.BACKEND_URL.concat("/register");
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
 
@@ -55,7 +54,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			login: async (email, password) => {
-				const urlLogin = urlBase.concat("/login");
+				const urlLogin = process.env.BACKEND_URL.concat("/login");
 
 				var headers = new Headers();
 				let base64 = require("base-64");
@@ -79,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			//ACTIONS TO GET DATA FROM OUR API
 			loadWatchlists: async () => {
-				const urlWatchlists = urlBase.concat("/user/watchlist");
+				const urlWatchlists = process.env.BACKEND_URL.concat("/user/watchlist");
 				var myHeaders = new Headers();
 				const token = getStore().token;
 				myHeaders.append("X-Access-Tokens", token);
@@ -103,7 +102,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			loadStocksFromWatchlists: async watchlist_id => {
 				const urlExt = "/watchlist/".concat(watchlist_id.toString());
 				//acortar concats a una linea
-				const urlWatchelement = urlBase.concat(urlExt);
+				const urlWatchelement = process.env.BACKEND_URL.concat(urlExt);
 
 				var myHeaders = new Headers();
 				const token = getStore().token;
@@ -148,7 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//ACTIONS TO ADD/MODIFY WATCHLISTS
 			addWatchlist: async watchlist => {
 				const urlExt = "/watchlist";
-				const urlWatchelement = urlBase.concat(urlExt);
+				const urlWatchelement = process.env.BACKEND_URL.concat(urlExt);
 
 				var myHeaders = new Headers();
 				const token = getStore().token;
@@ -172,7 +171,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			deleteWatchlist: async watchlist_id => {
 				const urlExt = "/watchlist/".concat(watchlist_id);
-				const urlWatchelement = urlBase.concat(urlExt);
+				const urlWatchelement = process.env.BACKEND_URL.concat(urlExt);
 
 				var myHeaders = new Headers();
 				const token = getStore().token;
@@ -194,7 +193,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			addStockToWatchlist: async (symbol, watchlist_id) => {
 				const urlExt = "/watchlist/".concat(watchlist_id);
-				const urlWatchelement = urlBase.concat(urlExt);
+				const urlWatchelement = process.env.BACKEND_URL.concat(urlExt);
 
 				var myHeaders = new Headers();
 				const token = getStore().token;
@@ -219,7 +218,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			deleteStockFromWatchlist: async (watchlist_id, stock_symbol) => {
 				const urlExt = "/watchlist/".concat(watchlist_id, "/", stock_symbol);
-				const urlWatchelement = urlBase.concat(urlExt);
+				const urlWatchelement = process.env.BACKEND_URL.concat(urlExt);
 
 				var myHeaders = new Headers();
 				const token = getStore().token;
@@ -279,7 +278,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			// ACTIONS TO LOAD STOCK INFO FROM OUR DATABASE
 			loadStockInfo: async symbol => {
-				const urlStock = urlBase.concat("/stock/", symbol);
+				const urlStock = process.env.BACKEND_URL.concat("/stock/", symbol);
 
 				var requestOptions = {
 					method: "GET",
@@ -297,7 +296,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			// LOADS STOCKS STARTING BY...
 			loadStocksStartingWith: async search => {
-				const urlStock = urlBase.concat("/stocks/", search);
+				const urlStock = process.env.BACKEND_URL.concat("/stocks/", search);
 
 				var requestOptions = {
 					method: "GET",
@@ -316,7 +315,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			// LOADS ALL STOCKS
 			loadStocksInfo: async () => {
-				const urlStock = urlBase.concat("/stock/");
+				const urlStock = process.env.BACKEND_URL.concat("/stock/");
 
 				var requestOptions = {
 					method: "GET",
